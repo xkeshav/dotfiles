@@ -19,9 +19,9 @@
 - object assign and other higher order function ( pure functions)
 - advance array function map, filter, reduce, find
 
-1) Component Convetions
+## Component Conventions
 
-###Controller
+### Controller
 
 Use a capture variable for this when using the controllerAs syntax. Choose a consistent variable name such as `vm`, which stands for ViewModel.
 
@@ -31,23 +31,25 @@ Use a capture variable for this when using the controllerAs syntax. Choose a con
   
 - Use a capture variable for `this` when using the controllerAs syntax. Choose a consistent variable name such as *vm*, which stands for ViewModel.
 - 
-###Modules:
+### Modules:
 
 - When there are multiple modules, the main module file is named *app.module.js* while other dependent modules are named after what they represent. For example, an admin module is named *admin.module.js*. The respective registered module names would be app and admin.
 
-###Routes:
+### Routes:
 
 - Separate route configuration into its own file. Examples might be *app.route.js* for the main module and *admin.route.js* for the admin module. Even in smaller apps I prefer this separation from the rest of the configuration.
 
 
-###Routing:
+### Routing:
+
 - Use the AngularUI Router for client-side routing.
 - UI Router offers all the features of the Angular router plus a few additional ones including nested routes and states.
 - The syntax is quite similar to the Angular router and is easy to migrate to UI Router.
 
 
-below is the basic format if DI in controller
+below is the basic format with DI in controller
 
+```
 .controller('NounController', ( __ANGULAR SERVICES, __OTHER_MODULES , __SERVICES, __CONSTANT, __RESOLVABLE)
 
 
@@ -61,6 +63,7 @@ __OTHER_MODULES like toastr, NgStorage etc..
 __SERVICES
 __CONSTANT
 __RESOLVABLE
+```
 
 
 
@@ -168,7 +171,7 @@ __RESOLVABLE
 })();
 ```
 
-3) filter and constants
+## filter and constants
 
 - *.filter* signature will be as below
 
@@ -234,7 +237,7 @@ you can use filter and condition within ng-bind as below
 - to debug the data on HTML use `<pre> {{ controllerVariable | json }}</pre>`
 
 
-4) Services and factories:
+## Services and factories
 
 - Services are instantiated with the new keyword, use this for public methods and variables. Since these are so similar to factories, use a factory instead for consistency.
 // service
@@ -322,7 +325,7 @@ function logger() {
     }
 }
 
-5) Use ng-annotate 
+## Use ng-annotate 
 for Gulp or Grunt and comment functions that need automated dependency injection using /* @ngInject */
 
 angular
@@ -350,7 +353,7 @@ function config($routeProvider) {
 }
 
 
-6)Restrict to Elements and Attributes:
+## Restrict to Elements and Attributes:
 
 - When creating a directive that makes sense as a stand-alone element, allow restrict E (custom element) and optionally restrict A (custom attribute). Generally, if it could be its own control, E is appropriate. General guideline is allow EA but lean towards implementing as an element when it's stand-alone and as an attribute when it enhances its existing DOM element.
 <my-calendar-range></my-calendar-range>
@@ -376,21 +379,6 @@ function config($routeProvider) {
 
 
 
-7) Naming Guidelines
-
-Use consistent names for all components following a pattern that describes the component's feature then (optionally) its type. My recommended pattern is *feature.type.js*. 
-
-There are 2 names for most assets:
-
-the file name (avengers.controller.js)
-the registered component name with Angular (AvengersController)
-
-
-PascalCaseConroller name
-camleCaseSerive name
-directiveDoesThis Name 
-
-
 When I find my structure is not feeling comfortable, I go back and revisit these *LIFT* guidelines
 
 Locating our code is easy
@@ -403,7 +391,3 @@ Try to stay DRY (Don’t Repeat Yourself) or T-DRY
 * Alternative folders-by-type.
 * I recommend "folders-by-feature", instead.
 */
-
-websocket topic id in uppercase = TOPIC_FORWHAT eg; TOPIC_DBCOUNT
-topic name prefixed with `topic` => topic_<forwhat> eg. topic_usage, `topic_dbcount`
-channel name prefixed with `channel` => channel_<forwhat> eg. `channel_dbcount`
