@@ -12,10 +12,12 @@ Following is the style guide for the FE project. It is recommened to follow one 
 ```
 
 **node_modules**
+
  - all node.js package reside here.
- - do no change anything  inside this folder, it is not going to uploaded on production server
+ - **do no change** anything  inside this folder, it is not going to uploaded on production server
 
 **src** 
+
 - this is the top-level directory
 - following is the folder structure
 
@@ -44,8 +46,9 @@ All images of project will be placed under **images** folder
 
 **specs**
 
-  - unit testing files will be placed here
-  - file nam suffixed with .spec.js for eg. login.spec.js
+  - unit testing files will be placed here.
+  - one component testing per file.
+  - file name suffixed with *.spec.js* for eg. login.spec.js
 
 **libs**
 
@@ -56,7 +59,7 @@ All images of project will be placed under **images** folder
   
  *favicon.ico* -- icon file visible in browser's top right in URL
 
-*index.html*
+*__index.html__*
 
  - HTML skeleton have `<head>` and `<body>` decalaration
  - enable ng-strict-di `<div ng-app="myApp" ng-strict-di>`
@@ -154,10 +157,6 @@ angular
 function DashboardController() { }
 ```
 
-Do Manual Annotating (using `$inject`) for Dependency Injection or use ng-annonate.
-
-Note:
-
 **directives**
 
   - file name: camel case suffixed with *.directive.js*
@@ -253,7 +252,7 @@ we also define `BASE_URL` here through `.value` provider
 - user authentication and page accessibility will be done from here.
 - event using `$scope.on` and _State Events_ are defined here.
 
-*app.filter.js*
+*__app.filter.js__*
 
 - contains all filter definition in a single file.
 - filter method name will be uppercase prefix with  `_FILTER`.
@@ -297,7 +296,7 @@ for eg.
 
 -The `$httpProvider` provider contains an array of interceptors which added  in `.config()`.
 
-*app.messages.js* 
+*__app.messages.js__* 
 
 - The file required for the confirm button pop-up messages list.
 - Add all messages custom text using `.value` provider.
@@ -318,7 +317,7 @@ for eg.
 
 - The file contains basic configuration for the chart and graphs with mock data.
 
-### naming convention
+### Naming convention
 
 Use consistent names for all components following a pattern that describes the component's feature then (optionally) its type. My recommended pattern is feature.type.js.
 
@@ -327,9 +326,9 @@ There are 2 names for most assets:
 the file name (*noun.controller.js*)
 the registered component name with Angular (*NounController*)
 
-PascalCaseConroller name
-camleCaseSerive name
-directiveDoesThis
+ - PascalCaseConroller
+ - camleCaseService
+ - directiveDoesThis
 
 websockets 
  - websocket topic id in uppercase = TOPIC_FORWHAT eg; TOPIC_DBCOUNT
