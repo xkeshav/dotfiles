@@ -1,0 +1,16 @@
+[
+{
+    "keys": ["ctrl+alt+t"],
+    "command": "terminal_view_open"
+},
+{
+    "keys": ["ctrl+shift+r"],
+    "command": "reveal_in_side_bar"
+},
+{
+    "keys": ["enter"], "command": "commit_completion", "context": [
+        { "key": "auto_complete_visible" }
+    ]
+},
+{ "keys": ["ctrl+shift+2"], "command": "jsdoc_param" }
+]
