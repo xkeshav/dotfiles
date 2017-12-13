@@ -2,34 +2,50 @@ Following is the style guide for the FE project. It is recommened to follow one 
 
 1) root folder for FE would be **WebUI**  with following file structure
 
-└── .gitignore
-├── node_modules
-├── webpack.config.json
-├── package.json
-├── README.md
-└── **src**
+```
+    └── .gitignore
+    ├── node_modules
+    ├── webpack.config.json
+    ├── package.json
+    ├── README.md
+    └── src
+```
 
--- node.js packages installed into **node_modules** directories. do no change this folder, it is not going to loaded on production server
+**node_modules**
+ - all node.js package reside here.
+ - do no change anything  inside this folder, it is not going to uploaded on production server
 
 **src** 
 - this is the top-level directory
 - following is the folder structure
 
-├── **app**
-├── **assets**
+```
+├── app 
+├── assets
 ├── favicon.ico
 ├── index.html
-└── **libs**
-├── **specs**
+└── libs
+└── specs
+```
 
 **assets**
-  ├── **images**
-  ├── **fonts**
 
-All images will be placed under **images** folder
+ - All static assests will be placed here
+
+```
+  ├── images
+  ├── fonts
+```
+
+All images of project will be placed under **images** folder
   - logo.png
   - no-whitespace-and-special-character.png
   - all-smallcase-hypen-divided-alphanumeric.jpg
+
+**specs**
+
+  - unit testing files will be placed here
+  - file nam suffixed with .spec.js for eg. login.spec.js
 
 **libs**
 
@@ -37,14 +53,19 @@ All images will be placed under **images** folder
 `bower install` or `npm install`
   + FileSaver.js
   + Moment.js
+  
+ *favicon.ico* -- icon file visible in browser's top right in URL
 
-**index.html**
+*index.html*
 
-- HTML skeleton have <head> and <body> decalaration
-- enable ng-strict-di <div ng-app="myApp" ng-strict-di>
+ - HTML skeleton have `<head>` and `<body>` decalaration
+ - enable ng-strict-di `<div ng-app="myApp" ng-strict-di>`
+ - Service worker registration code will be here in `<script>` tag
 
-**app** directory has below folder structure 
-( Note: this is **folder-by-type** structure )
+**app** directory has below folder structure ( Note: this is **folder-by-type** structure )
+
+
+```
 .
 ├── app.constant.js
 ├── app.filter.js
@@ -56,36 +77,37 @@ All images will be placed under **images** folder
 ├── index.less
 ├── index.module.js
 ├── index.run.js
-├── inspinia.js
-├── **directives**
-├── **controllers**
-├── **less**
-├── **services**
-└── **views**
+├── base.js
+├── sw.js
+├── directives
+├── controllers
+├── less
+├── services
+└── views
+
+```
 
 **controllers**
 
   - Define one controller per file.
   - file name: lowercase, appended with *<whatever>.controller.js*
-  - component name would be pascal case suffixed with `Controller`; 
-     eg. *DashboardController*
+  - component name would be pascal case suffixed with `Controller` 
+     for eg. *DashboardController*
   - Use the `controllerAs` syntax over the classic controller with *$scope* syntax.
   - Categorize your controllers in 2 category
-  - Parent Controller: controller which associated with a complete page.
-  - Child Controller: controller which are associated with modal (pop-up) page.
   
-  - Parent controller
-   - use controllerAS `vm`
-   - filename: *user.controller.js*
-   - controller name: `.controller('UserController', {});`
+     - Parent controller --controller which associated with a complete page.
+       - use controllerAS `vm`
+       - filename: *user.controller.js*
+       - controller name: `.controller('UserController', {});`
   
-  - Child controller
-   - use controllerAS  `$ctrl` for child controller
-   - file name: *confirm-modal.controller.js*
-   - controller name: `.controller('ConfirmModalController', {});`
-   - All child controller template at one place under *views/templates* folder
+    - Child controller --  controller which are associated with modal (pop-up) page
+       - use controllerAS  `$ctrl` for child controller
+       - file name: *confirm-modal.controller.js*
+       - controller name: `.controller('ConfirmModalController', {});`
+       - All child controller template at one place under *views/templates* folder
 
-  - Define all variables on top of controller and bind with `vm`  with `angualr.extend()` method.
+    - Define all variables on top of controller and bind with `vm`  with `angualr.extend()` method.
 
 ```
 /* avoid */
@@ -142,15 +164,15 @@ Note:
     eg: *disallowSpace.directive.js*
   - directive name: camel case
     eg: ` angular.directive('matchWindowHeight', {})` 
+    and in HTML *<div match-window-height = "">*
   - use `restrict: 'EA'` in directive 
 
-   <div match-window-height = "" >
 
 **services**
 
   - file name: lowercase suffixed with *.service.js* 
       eg: *database.service.js*
-  - directive name: camel cased prefixed with `Service`
+  - service name: camel cased prefixed with `Service`
       eg: `angular.factory('dataService', dataService)`
   - use a `.factory` instead of `.service` for consistency.
   - service dependency: `$http` 
@@ -205,26 +227,26 @@ We are using  less files for the styling of application.
 
 - Use BEM (Block Element Modifier) model while decakring custom css
 
-header--title_size
+*header--title_size*
 
 
-*app/index.less* 
+*__index.less__* 
 
-is main stylesheet file which import other less file located on */app/less* folder.
+is the main stylesheet file which import other less files located on */app/less* folder.
 
-*index.module.js*
+*__index.module.js__*
 
 The very first file of our project where we defined our module and register outher modules.
 
 `angular.module('app', ['ngStorage','ui-router', ...]);`
 
-*index.config.js*
+*__index.config.js__*
 
 is the file we are using for the purpose of all routing and other provider basic configuration.
 
 we also define `BASE_URL` here through `.value` provider
 
-*index.run.js*
+*__index.run.js__*
 
 - All broadcast messages and `.run` block method will be added here.
 - `$rootScope` is used.
@@ -246,7 +268,7 @@ we also define `BASE_URL` here through `.value` provider
 
 ```
 
-*app.constant.js* 
+*__app.constant.js__* 
 
 - contains all constant in a single file used across the application.
 - `.constant` name will be in uppercase and value can be {object} , [array] or [{object}, {object}].
@@ -268,7 +290,7 @@ for eg.
         }];
 ```
 
-*app.interceptor.js* 
+*__app.interceptor.js__* 
 
 - creating an interceptor that will modify all requests made with the $http service as well as intercept any response errors.
 - We want to modify the outgoing requests so that we can add an authorization token to the header of our call. 
@@ -280,23 +302,39 @@ for eg.
 - The file required for the confirm button pop-up messages list.
 - Add all messages custom text using `.value` provider.
 
-*app.route.js*
+*__app.route.js__*
 
  - Separate route configuration into its own file. Examples might be *app.route.js* for the main module and *admin.route.js* for the admin module. 
 
-*inspinia.js* 
+*__base.js__* 
 
 - javascript code which is used to adjust the height of application on scroll and resize.
 
-*chart.config.js* 
+*__sw.js__*
+
+ - Service worker configuration will be written here ( activation, installation and strategy)
+
+*__chart.config.js__* 
 
 - The file contains basic configuration for the chart and graphs with mock data.
 
-websockets naming convetion
+### naming convention
 
-websocket topic id in uppercase = TOPIC_FORWHAT eg; TOPIC_DBCOUNT
-topic name prefixed with `topic` => topic_<forwhat> eg. topic_usage, `topic_dbcount`
-channel name prefixed with `channel` => channel_<forwhat> eg. `channel_dbcount`
+Use consistent names for all components following a pattern that describes the component's feature then (optionally) its type. My recommended pattern is feature.type.js.
 
-Reference: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md
+There are 2 names for most assets:
+
+the file name (*noun.controller.js*)
+the registered component name with Angular (*NounController*)
+
+PascalCaseConroller name
+camleCaseSerive name
+directiveDoesThis
+
+websockets 
+ - websocket topic id in uppercase = TOPIC_FORWHAT eg; TOPIC_DBCOUNT
+ - topic name prefixed with `topic` => topic_<forwhat> eg. topic_usage, `topic_dbcount`
+ - channel name prefixed with `channel` => channel_<forwhat> eg. `channel_dbcount`
+
+for more Reference: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md
 
