@@ -1,0 +1,31 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        },
+        "sourceType": "module"
+    },
+    "extends": "eslint:recommended",
+    "globals": {
+      "angular": true,
+      "module": true,
+      "inject": true,
+      "moment": true,
+      "saveAs": true,
+      "require": false
+    },
+    "rules": {
+        "wrap-iife": [0, "any"],
+        "quotes": [0, "single"],
+        "indent": [0, "tab"],
+        "linebreak-style": [0, "unix"],
+        "semi": [2, "always"]
+    }
+}
