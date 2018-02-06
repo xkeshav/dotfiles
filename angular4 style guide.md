@@ -45,7 +45,6 @@ interface ColorArrayResponse extends ResponseData {
 import {Color } from './shared/interface/';
 
 @Componenet
-
 class ColorComponent extends OnInit {
     public color: Color; 
     
