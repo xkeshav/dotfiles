@@ -24,7 +24,7 @@ export interface Color {
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-import { ResponseData, Color } from './intefaces';
+import { ResponseData, Color } from './interfaces';
 
 @Injectable()
 class ColorService {
