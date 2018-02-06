@@ -1,40 +1,72 @@
 
 # Angular 4 Style Guide
 
+### interfaces.ts
+
+```js
+export interface ResponseData {
+    code: number;
+    message: string;
+    status: string;
+}
+
+export interface Color {
+    id: string;
+    code: string;
+    name: string;
+    value: number;
+}
+```
+
 ### color.service.ts
 
 ```js
-import {Color, ResponseData } from './shared/interface/';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-@Injectable
+import { ResponseData, Color } from './intefaces';
+
+@Injectable()
 class ColorService {
 
-    contructor(private httpClient: HttpClient) { }
-    
-    getColor() {
-       this.httpClient.get<ColorResponse>(`assets/data/under-attacks.json`).map((res) => {
-            res.items;
+    private headers: HttpHeaders;
+    constructor(private httpClient: HttpClient) {
+        this.headers = new HttpHeaders({
+            'Content-type': 'application/custom.json'
         });
+    }
+
+    getColors() {
+        return this.httpClient
+            .get<ColorArrayResponse>(`${BASE_URL}/color`, { headers: this.headers }).map((res) => {
+                return res.items;
+            });
     }
 
     getColorById(id) {
-        const params = new HttpParams()
-        .set('page', pagenum)
-        .set('id', id);
-         this.httpClient.getColorById<ColorResponse>(`whwtever/end/point`, {param} ).map((res) => {
-            res.items;
+        const params = new HttpParams().set('id', id);
+        // url would be http://end/point/color?id=<id>
+        return this.httpClient
+            .get<ColorResponse>(`${BASE_URL}/color/`, { headers: this.headers, params }).map((res) => {
+                return res.item;
         });
     }
+    // @param formdata = { id: '', code: '00ff00',  name: 'red', value: 25 }
+    updateColor(formdata) { 
+        return this.httpClient
+            .post<ColorResponse>(`${BASE_URL}/color/`, formdata, { headers: this.headers }).map((res) => {
+                return res.item;
+            });
+    }
+
 }
 
-// if it is single object
-interface ColorResponse extends ResponseData {
-  item : Color;
-}
-
-// if it is array of objects
 interface ColorArrayResponse extends ResponseData {
     items: Color[];
+}
+
+interface ColorResponse extends ResponseData {
+    item: Color;
 }
 
 ```
@@ -42,16 +74,22 @@ interface ColorArrayResponse extends ResponseData {
 ### color.component.ts
 
 ```js
-import {Color } from './shared/interface/';
 
-@Component
+import { Component, OnInit } from '@angular/core';
+
+import { Color } from './shared/interface/';
+
+@Component({
+    selector: 'app-color',
+    templateUrl: './color.component.html'
+}
 class ColorComponent extends OnInit {
     
-    public color: Color; 
+    public color: Color[]; 
     
     constructor ( private colorService: ColorService) {}
     
-    this.colorService.getColor().subscribe( (data) => {
+    this.colorService.getColors().subscribe( (data) => {
         // do some action on data and return
         this.color = data;
     }, (err) => {
