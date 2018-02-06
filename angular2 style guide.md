@@ -4,9 +4,9 @@
 ### color.service.ts
 
 ```js
-import {Color, ResponseData } from './shared/interface/;
+import {Color, ResponseData } from './shared/interface/';
 
-@Injectable 
+@Injectable
 class ColorService {
 
     contructor(private httpClient: HttpClient) { }
@@ -42,12 +42,12 @@ interface ColorArrayResponse extends ResponseData {
 ### color.componenet.ts
 
 ```js
-import {Color } from './shared/interface/;
+import {Color } from './shared/interface/';
 
 @Componenet
 
 class ColorComponent extends OnInit {
-    public color: Color; 
+    public color: Color;
     constructor ( private colorService: ColorService) {}
     this.colorService.getColor().subscribe( (data) => {
         // do some action on data and return

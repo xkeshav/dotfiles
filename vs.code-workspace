@@ -1,0 +1,48 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            ".eslintrc": true,
+            ".lesshintrc": true,
+            ".gitignore": true,
+            ".eslintignore": true,
+            ".editorconfig": true,
+            ".gitattributes": true,
+            "tslint.json": true,
+            "semantic.json": true,
+            "protractor.conf.js": true,
+            "karma.conf.js": true,
+            ".angular-cli.json": true,
+            "package-lock.json": true,
+            "tsconfig.json": true,
+            "node_modules/": true,
+            "e2e/": true,
+            ".vscode/": true,
+            "**/*.js": {
+                "when": "$(basename).ts"
+            },
+            "**/*.js.map": {
+                "when": "$(basename)"
+            },
+            "**/*.css.map": {
+                "when": "$(basename)"
+            }
+        },
+        "search.exclude": {
+            "node_modules/": true,
+            "e2e/": true,
+            "dist": true,
+            "/src/assets/icon": true,
+            "/src/assets/fonts": true,
+        }
+    }
+}

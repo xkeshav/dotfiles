@@ -1,0 +1,51 @@
+// User Settings
+{
+    "sublimeTextKeymap.promptV3Features": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.snippetSuggestions": "top",
+    "editor.wordWrap": "on",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": false,
+    "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace",
+    "workbench.colorTheme": "Monokai",
+    "editor.selectionHighlight": true,
+    "workbench.colorCustomizations": {
+        "editor.selectionBackground": "#8a5151",
+        "editor.selectionHighlightBackground": "#8d6969"
+    },
+    "tslint.alwaysShowRuleFailuresAsWarnings": true,
+    "window.title": "${activeEditorMedium}${separator}${rootName}",
+    "[markdown]": {
+        "editor.formatOnSave": true,
+        "editor.renderWhitespace": "all",
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": false
+    },
+    "files.exclude": {
+        "node_modules/": false,
+        "e2e/": true,
+        ".babelrc": true,
+        ".eslintrc": true,
+        ".lesshintrc": true,
+        ".gitignore": true,
+        ".eslintignore": true,
+        ".editorconfig": true,
+        ".gitattributes": true,
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/*.js": {
+            "when": "$(basename).ts"
+        },
+        "**/*.js.map": {
+            "when": "$(basename)"
+        }
+    },
+    "search.exclude": {
+        "node_modules/": true,
+        "e2e/": true,
+        "dist": true
+    },
+    "workbench.activityBar.visible": true
+}
