@@ -4,7 +4,7 @@
 ### color.service.ts
 
 ```js
-import {Color, ResponseData } from './shared/interface/;
+import {Color, ResponseData } from './shared/interface/';
 
 @Injectable 
 class ColorService {
@@ -42,7 +42,7 @@ interface ColorArrayResponse extends ResponseData {
 ### color.componenet.ts
 
 ```js
-import {Color } from './shared/interface/;
+import {Color } from './shared/interface/';
 
 @Componenet
 
