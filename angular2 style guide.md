@@ -10,18 +10,18 @@ import {Color, ResponseData } from './shared/interface/';
 class ColorService {
 
     contructor(private httpClient: HttpClient) { }
+    
     getColor() {
        this.httpClient.get<ColorResponse>(`assets/data/under-attacks.json`).map((res) => {
             res.items;
         });
     }
 
-    getColorById() {
+    getColorById(id) {
         const params = new HttpParams()
-        .set('first', 'value')
-        .set('second', 'value');
-        .set()
-         this.httpClient.getColorById<ColorResponse>(`assets/data/under-attacks.json`, {param} ).map((res) => {
+        .set('page', pagenum)
+        .set('id', id);
+         this.httpClient.getColorById<ColorResponse>(`whwtever/end/point`, {param} ).map((res) => {
             res.items;
         });
     }
@@ -39,7 +39,7 @@ interface ColorArrayResponse extends ResponseData {
 
 ```
 
-### color.componenet.ts
+### color.component.ts
 
 ```js
 import {Color } from './shared/interface/';
@@ -48,7 +48,9 @@ import {Color } from './shared/interface/';
 
 class ColorComponent extends OnInit {
     public color: Color; 
+    
     constructor ( private colorService: ColorService) {}
+    
     this.colorService.getColor().subscribe( (data) => {
         // do some action on data and return
         this.color = data;
