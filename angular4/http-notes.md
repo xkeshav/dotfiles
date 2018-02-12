@@ -21,7 +21,9 @@ formdata.append('key', value);
 then
 
 ```js
-return this.httpClient.post<TypeOfResponse>(`/only/endpoint`, formdata, { withCredentials: true|false }).map( (res) => res.item);
+return this.httpClient
+      .post<TypeOfResponse>(`/only/endpoint`, formdata, { withCredentials: true|false })
+      .map( (res) => res.item);
 ```
 
 --
@@ -32,12 +34,12 @@ if any custom content-type is required for any specific endpoint ( other than th
 
 const headers = new HttpHeaders({ 'Content-Type': 'application/octet-stream' });
 
-
 return this.httpClient
     .verb<TypeOfResponse>(`/only/endpoint`, {
                 responseType: 'blob',
                 headers,
-                withCredentials: true});
+                withCredentials: true})
+     .map(...);
 ```
 
 ---
@@ -45,12 +47,15 @@ return this.httpClient
 if any endpoint need query params than use HttpParams
 
 ```js
-const params = new HttpParams()
-.set('param1', 'value')
-.set('foo', 'bar');
+getSomething(param) {
+   const params = new HttpParams()
+      .set('param1', param)
+      .set('foo', 'bar');
 
-return this.httpClient
-    .verb<TypeOfResponse>(`/only/endpoint`, { params, withCredentials: true });
+     return this.httpClient
+         .verb<TypeOfResponse>(`/only/endpoint`, { params, withCredentials: true })
+         .map(...);
+}
 ```
 
 ---
@@ -58,7 +63,8 @@ if some API ( for eg. forgot or register) do not require auth token than write `
 
 ```
 return this.httpClient
-    .verb<TypeOfResponse>(`/no/auth/endpoint`, {withCredentials: false });
+    .verb<TypeOfResponse>(`/no/auth/endpoint`, {withCredentials: false })
+    .map(...);
  ```
  
 
