@@ -56,6 +56,9 @@ return this.httpClient
 ---
 if some API ( for eg. forgot or register) do not require auth token than write `withCredential:false`
 
+```
 return this.httpClient
     .verb<TypeOfResponse>(`/no/auth/endpoint`, {withCredentials: false });
+ ```
+ 
 
