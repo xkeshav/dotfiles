@@ -116,16 +116,18 @@ is the proper way
 
 - always make property public ( default visibility is public) if it is being used in html
 
-```
+- use built-in structuctural directive 
+
+```html
 <ng-template ngFor let-app [ngForOf]="userDetails.roles">
 <div> {{app.name}}</div>
 </ng-template>
 ```
 
-shorter way
+below is the similar can be done in shorter way
 
 ```html
-<div *ngFor="let app for userDetail['roles']>{{app.name}}</div>
+<div *ngFor="let app for userDetail['roles']">{{app.name}}</div>
 ```
 
 - use `[InnerHTML]` instead of interploation `{{}}` when value is not changing in HTML 
