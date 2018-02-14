@@ -97,12 +97,13 @@ class ColorComponent extends OnInit {
     });
 }
 ```
+----
 
 - use array notation of property of object in html
 
-`{{user.firstName}}`` will give the error squigglies
+```{{user.firstName}}``` will give the error squigglies
 
-`{{user['fisrtName']}}`` is right way
+```{{user['fisrtName']}}```` is the right way
 
 
 - always make property public ( default visibility is public) if it is being used in html
