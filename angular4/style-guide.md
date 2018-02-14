@@ -97,3 +97,33 @@ class ColorComponent extends OnInit {
     });
 }
 ```
+
+- use array notation of property of object in html
+
+`{{user.firstName}}`` will give the error squigglies
+
+`{{user['fisrtName']}}`` is right way
+
+
+- always make property public ( default visibility is public) if it is being used in html
+
+```
+<ng-template ngFor let-app [ngForOf]="userDetails.roles">
+<div> {{app.name}}</div>
+</ng-template>
+```
+
+shorter way
+
+<div *ngFor="let app for userDetail['roles']>{{app.name}}</div>
+
+
+- use `[InnerHTML]` instead of interploation `{{}}` when value is not changing in HTML 
+
+<p [InnerHTML]="''.concat(user.firstName, ' ', user.lastName)"></p>
+
+- error undefiend supress method
+    use ` firstName?.errors?.required `
+
+
+
