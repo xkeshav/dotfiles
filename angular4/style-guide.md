@@ -124,8 +124,9 @@ is the proper way
 
 shorter way
 
+```html
 <div *ngFor="let app for userDetail['roles']>{{app.name}}</div>
-
+```
 
 - use `[InnerHTML]` instead of interploation `{{}}` when value is not changing in HTML 
 
