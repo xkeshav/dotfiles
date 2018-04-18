@@ -8,7 +8,7 @@ this file location will be
 
 you can open using F1 > Preferences: Open User Settings 
 
-and copy the content of _user-settings.json_ 
+and copy the content of [settings.json](settings.json)
 
 ### Workspace Settings
 
@@ -18,7 +18,7 @@ you can do by navigating *File > 'Save Workspace As ...'* and save the file into
 
 Here you can specify settings which folder/files need to be dispalyed while you open that workspace and many other settings like when to hide .js file and .js.map files
 
-copy the content of _project.code-workspace_ file and paste into this file
+copy the content of [project.code-workspace](project.code-workspace) file and paste into this file
 
 ### Folder Settings 
 
@@ -26,7 +26,7 @@ file location is *.vscode/settings.json*
 
 and here you can specify the folder settings ( if required)
 
-copy the content of *folder-settings.json* and paste here
+copy the content of [folder-settings.json](folder-settings.json) and paste here
 
 
 
