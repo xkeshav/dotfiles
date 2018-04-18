@@ -1,0 +1,66 @@
+{
+  "folders": [
+    {
+      "path": "./"
+    }
+  ],
+  "settings": {
+    "typescript.referencesCodeLens.enabled": true,
+    "typescript.implementationsCodeLens.enabled": true,
+    "typescript.autoImportSuggestions.enabled": true,
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "*.code-workspace": true,
+      "node_modules": true,
+      "e2e": true,
+      ".babelrc": true,
+      ".eslintrc": true,
+      ".lesshintrc": true,
+      ".prettierrc": true,
+      ".gitignore": true,
+      ".eslintignore": true,
+      ".editorconfig": true,
+      ".gitattributes": true,
+      "tslint.json": true,
+      "semantic.json": true,
+      "protractor.conf.js": true,
+      "karma.conf.js": true,
+      "package.json": false,
+      "package-lock.json": true,
+      "tsconfig.json": true,
+      "**/.vscode": true,
+      ".angular-cli.json": false,
+      "src/polyfills.ts": true,
+      "src/test.ts": true,
+      "src/typings.d.ts": false,
+      "src/tsconfig.app.json": true,
+      "src/tsconfig.spec.json": true,
+      "**/*.js": {
+        "when": "$(basename).ts"
+      },
+      "**/*.spec.ts": {
+        "when": "$(basename).ts"
+      },
+      "**/*.js.map": {
+        "when": "$(basename)"
+      },
+      "**/*.css.map": {
+        "when": "$(basename)"
+      }
+    },
+    "search.exclude": {
+      "node_modules/": true,
+      ".vscode": true,
+      "e2e/": true,
+      "dist": true,
+      "/src/assets/icon": true,
+      "/src/assets/fonts": true
+    },
+    "typescript.tsdk": "node_modules/typescript/lib"
+  }
+}
+

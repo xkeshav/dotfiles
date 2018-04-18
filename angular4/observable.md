@@ -1,6 +1,22 @@
 you can create type of observable by using 
 
 > Observable.of(<whatever>);
+> 
+OR
+
+import {Observable} from 'rxjs';
+
+let words = ['coding blast', 'badword', 'coding', 'blast'];
+
+let source = Observable.create(observer => {
+    for (let word of words) {
+        if (word === 'badword') {
+            observer.error('Bad word!');
+        }
+        observer.next(word);
+    }
+    observer.complete();
+});
 
 
 - Error and Finally Block in Observable.

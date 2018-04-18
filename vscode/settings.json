@@ -1,4 +1,3 @@
-// User Settings
 {
     "sublimeTextKeymap.promptV3Features": true,
     "editor.multiCursorModifier": "ctrlCmd",
@@ -6,17 +5,35 @@
     "editor.wordWrap": "on",
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
+    "[html]": {
+        "editor.formatOnSave": true,
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        }
+    },
     "editor.insertSpaces": false,
     "editor.detectIndentation": false,
+    "editor.cursorWidth": 2,
+    "editor.find.globalFindClipboard": true,
     "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace",
-    "workbench.colorTheme": "Monokai",
+    "editor.fontSize": 13,
+    "workbench.colorTheme": "Default Light+",
     "editor.selectionHighlight": true,
+    "terminal.integrated.copyOnSelection": true,
     "workbench.colorCustomizations": {
-        "editor.selectionBackground": "#8a5151",
-        "editor.selectionHighlightBackground": "#8d6969"
+        "editor.selectionBackground": "#ebe1e1",
+        "editor.selectionHighlightBackground": "#7fa391",
+        "statusBar.background": "#3b2f2f",
+        "statusBar.noFolderBackground": "#0A0A0D",
+        "statusBar.debuggingBackground": "#511f1f"
     },
-    "tslint.alwaysShowRuleFailuresAsWarnings": true,
     "window.title": "${activeEditorMedium}${separator}${rootName}",
+    "[typescript]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true
+    },
     "[markdown]": {
         "editor.formatOnSave": true,
         "editor.renderWhitespace": "all",
@@ -24,28 +41,22 @@
         "editor.quickSuggestions": false
     },
     "files.exclude": {
-        "node_modules/": false,
-        "e2e/": true,
-        ".babelrc": true,
-        ".eslintrc": true,
-        ".lesshintrc": true,
-        ".gitignore": true,
-        ".eslintignore": true,
-        ".editorconfig": true,
-        ".gitattributes": true,
         "**/.git": true,
-        "**/.DS_Store": true,
-        "**/*.js": {
-            "when": "$(basename).ts"
-        },
-        "**/*.js.map": {
-            "when": "$(basename)"
-        }
+        "**/.DS_Store": true
     },
     "search.exclude": {
         "node_modules/": true,
         "e2e/": true,
         "dist": true
     },
-    "workbench.activityBar.visible": true
+    "files.autoSave": "off",
+    "workbench.activityBar.visible": true,
+    "editor.minimap.enabled": false,
+    "extensions.ignoreRecommendations": true,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "workbench.editor.showTabs": true,
+    "workbench.sideBar.location": "left",
+    "extensions.showRecommendationsOnlyOnDemand": true,
+    "window.zoomLevel": 0,
+    "workbench.startupEditor": "newUntitledFile"
 }
