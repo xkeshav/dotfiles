@@ -6,6 +6,7 @@ OR
 
 import {Observable} from 'rxjs';
 
+```
 let words = ['coding blast', 'badword', 'coding', 'blast'];
 
 let source = Observable.create(observer => {
@@ -17,6 +18,7 @@ let source = Observable.create(observer => {
     }
     observer.complete();
 });
+```
 
 
 - Error and Finally Block in Observable.
