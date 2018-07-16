@@ -1,4 +1,5 @@
 below is sample reactive form snippet ; use below class and semantics
+
 ```js
 <form [formGroup]="loginForm" novalidate class="form" (ngSubmit)="doLogin()">
 <div class="row">
@@ -26,3 +27,13 @@ below is sample reactive form snippet ; use below class and semantics
 </div>
 </form>
 ```
+
+Instead of using ` new FormControl()`` use `['']``
+
+        this.applicationForm = this.fb.group({
+            name: ['', [Validators.required, Validators.maxLength(55)]],
+            version: ['', [Validators.required, Validators.maxLength(55)]],
+            type: [null, Validators.required],
+            //url: new FormControl({ value: '', disabled: true })
+            url: [{ value: '', disabled: true }]
+        });
