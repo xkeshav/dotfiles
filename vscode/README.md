@@ -10,7 +10,7 @@ you can open using F1 > Preferences: Open User Settings
 
 and copy the content of _settings.json_
 
-for for latest vs code settings copy the content of _user settings.json_
+for for latest vs code settings copy the content of _user-settings.json_
 
 ### Workspace Settings
 
@@ -28,4 +28,4 @@ file location is _.vscode/settings.json_
 
 and here you can specify the folder settings ( if required)
 
-copy the content of _folder-settings.json_ and paste here
+copy the content of _folder-settings.json_ and paste on the Folder Settings tab

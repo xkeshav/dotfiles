@@ -1,11 +1,16 @@
-you can create type of observable by using 
+you can create type of observable by using **.of** and **.from** operators
 
-> Observable.of(<whatever>);
-> 
-OR
-
+```
 import {Observable} from 'rxjs';
 
+Observable.of(object); // or 
+Observable.from(array);
+
+```
+
+
+
+```
 let words = ['coding blast', 'badword', 'coding', 'blast'];
 
 let source = Observable.create(observer => {
@@ -17,6 +22,7 @@ let source = Observable.create(observer => {
     }
     observer.complete();
 });
+```
 
 
 - Error and Finally Block in Observable.
