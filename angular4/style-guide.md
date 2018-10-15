@@ -148,30 +148,29 @@ below is the similar can be done in shorter way
 
 # Component
 
-Component Directive
+*   must have `ngOninit()` and `constructor()`
 
-must have ngOninit() and constructor()
+*   `constructor()` have all attribute initialization place mostly Boolean
 
-constructor() have all attribute initialization place mostly Boolean
+*   all services initialization with `private` keyword
 
-all services initialization with `private` keyword
+*   Do not use _this_ keyword inside `constructor()` for the services but in `ngOninit` we need to call with _this_ .
 
-we do not use this inside `constructor()` for the services which is parameter of this function but in `ngOninit` we call with this.authService
+for eg. `this.authService.methodCall()`
 
-ngOnInit() have the method which need to call as soon as we arrive on this page
-
-or call this component
+*   `ngOnInit()` have the methods which need to call as soon as we arrive on this page or call this component.
 
 # Directive
 
-must start with some napspace
+must start with some namespace
 
 *   extends lifecycle interfaces such as `OnDestroy` if using lifecycle methods `ngOnDestroy()` within the component,
-*   note that it does not throw any error if you use the method but did not extend the interface.
+
+Note: Although it does not throw any error if you use the lifecycle methods but did not extend the respective interface. And if you implements these interface than must call their method with empty body.
 
 for eg.
 
-    class India {
+    class Shape {
             ngOnInit() {
                 //this will work
             }
@@ -180,9 +179,9 @@ for eg.
             }
         }
 
-will do not throw any error but following is more correct and valid
+But following is more correct and valid
 
-    class India implements OnInit, OnDestroy {
+    class Shape implements OnInit, OnDestroy {
             ngOnInit() {
                     // initialize varaibles and call methods
                 }
@@ -191,58 +190,65 @@ will do not throw any error but following is more correct and valid
                 }
     }
 
-Note: if you implements than must call the method with empty body
+additionaly you can set typing of these methods such as `ngOnDestroy(): void`
 
-additionaly you can set typing of such as `ngOnDestroy(): void`
-
----
+# Unsubscription of Observables
 
 If you unsubscribe a subscription; make sure it has been initialized
 
     import { Subscription } from 'rxjs/Subscription';
     class Beta implements OnDestroy () {
-
-    private alpha$: Subscription;
-
-    otherMethod() {
-        this.alpha$ = service.method().subscribe( () => );
+       private alpha$: Subscription;
+         otherMethod() {
+             this.alpha$ = service.method().subscribe( () => );
+        }
+        ngOnDestroy(){
+             this.alpha$.unsubscribe();
+         }
     }
-
-    ngOnDestroy(){
-        this.alpha$.unsubscribe();
-    }
-
-}
 
 will throw error of memory leak
 
-to fix this.
+to fix this, initialize with this line
 
     private alpha$: Subscription = new Subscription();
 
-// reduce ternary
-const val = someArray[0] ? someArray[0] : ''; wrong way
+---
 
-const val = someArray[0] || ''; right way
+*   Reduce ternary method with or conditions
+
+    const val = someArray[0] ? someArray[0] : '';
+
+can we re-written as
+
+    const val = someArray[0] || '';
 
 *   Follow same convention throughout the file for typings
-    `Array<User>` or `User[]`
 
--   assign same alias for scommon servive in all files
-    for eg.
+`Array<User>` or `User[]`
 
-        constructor(
-            private auth: AuthenticationService,
-            private toastr: ToastrService,
-            private fb: FormBuilder,
-            private modalService: BsModalService
+*   User _Partial_ keyword insead of optional binding `?`
 
-    ) {}
+    *   Partial<Array<string>>
+    *   Partial<UserList[]>
+
+-   Assign same alias for common service thorughtout all files of project.
+
+          constructor(
+              private auth: AuthenticationService,
+              private toastr: ToastrService,
+              private fb: FormBuilder,
+              private modalService: BsModalService
+
+          ) {}
+
+## ngOnChanges signature
+
+this will be used whenever there is input binding with component i.e. @Input()
 
 standard format of `ngOnChanges()`
 
-*   either use `for...of`
-
+either use `for...of`
 
     ngOnChanges(changes: SimpleChanges) {
         for (const propName of Object.keys(changes)) {
@@ -262,28 +268,25 @@ or when use `for...in` wrap it within if condition.
         }
     }
 
-Note: if there are object as input property always check equality with `JSON.stringify()`
+*   if there are object as input property always check equality with `JSON.stringify()`
 
-    if (propName === 'inputData') {
-            const change: SimpleChange = changes[propName];
-            if (
-                    change.currentValue &&
-                    JSON.stringify(change.currentValue) !== JSON.stringify(change.previousValue)
-                ) {
-                    console.log('iinputData changed to==>', change.currentValue);
-                    thius.doWhatever(change.currentValue);
-                }
-        }
 
-some object method are not defined in .d.ts file for eg. `Object.entries()``
+        if (propName === 'inputData') {
+                const change: SimpleChange = changes[propName];
+                if (
+                        change.currentValue &&
+                        JSON.stringify(change.currentValue) !== JSON.stringify(change.previousValue)
+                    ) {
+                        console.log('iinputData changed to==>', change.currentValue);
+                        thius.doWhatever(change.currentValue);
+                    }
+            }
+
+some object method are not defined in _.d.ts_ file for eg. `Object.entries()``
 
 so use this way `(<any>Object).entries(obj)`
 
-    Partial<Array<string>> || Partial<string[]> < this is right
-
-(<any>Object).entries(arrayOfObject)
-
-    - Modal component file and class always ends with *modal*
+*   Modal component file and class always ends with _modal_
 
 file name: _instance-modal.ts_
 
@@ -294,7 +297,8 @@ file name: _instance-modal.ts_
 
         export class InstanceModalComponent implements OnInit {}
 
-putr space after comment starts
+*   put space after comment starts
+
 //TODO: need to refactor X
 // TODO: need to refactor ✓
 
@@ -319,11 +323,11 @@ correct one is
         // in HTML
         <app-element [processData]="processItem" ></app-element>
 
-use `const` which is not going to re-assigned
+*   Always use `const` which is not going to re-assigned.
 
-Do not use shadow variables.
+*   Do not use shadow variables.
 
     function (data, item) {
-        data.map( (item) => item.toUpperCase());
-        // here item is shadowed varaible
+    data.map( (item) => item.toUpperCase());
+    // here item is shadowed varaible
     }
