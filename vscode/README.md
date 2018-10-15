@@ -29,3 +29,17 @@ file location is _.vscode/settings.json_
 and here you can specify the folder settings ( if required)
 
 copy the content of _folder-settings.json_ and paste on the Folder Settings tab
+
+### enable tslint
+
+You can enable tslint along with prettier plugin to get error detail of typescript files.
+
+first install tslint globally
+
+> npm install -g tslint typescript
+
+install (tslint)[https://marketplace.visualstudio.com/items?itemName=eg2.tslint]extension on vscode
+
+add below text in _tslint.json_ to make compatible with prettier plugin
+
+"extends": ["tslint:latest", "tslint-config-prettier"]
