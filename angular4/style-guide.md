@@ -336,58 +336,68 @@ correct one is
 
 *   Write service name and parameters self explanatory ( camelCase)
 
+```ts
     getProcessesForApplicationInstance(id: string, data) X
 
     getProcessListByInstance(instanceId:string, formdata) ✓
+```
 
 *   Add typing of response ahead to http verb: for eg:
 
+```ts
     getProcessList(appId: string) {
-    return this.httpClient
-    .get<ProcessListResponse>(`/application/${appId}/processes, {
-    withCredentials: true
-    })
-    .catch((error) => Observable.throw(error))
-    .map((res) => res.item);
+        return this.httpClient
+            .get<ProcessListResponse>(`/application/${appId}/processes, {
+               withCredentials: true })
+            .catch((error) => Observable.throw(error))
+            .map((res) => res.item);
     }
-
     export interface ProcessListResponse extedns StandardResponseData{
     item: Process[];
     }
+```
 
--   Either add typing ahead to function name when there is DELETE or PUT request, for eg:
+*   Either add typing ahead to function name when there is DELETE or PUT request, for eg:
 
+```ts
     deleteApplication(appId: string): Observable<any> {
     return this.httpClient
     .delete(`/application/${appId}`, { withCredentials: true })
     .catch((error) => Observable.throw(error));
     }
+```
 
 *   If there is params data then argument name would be `paramsData` and assign it to `params` so that we can use params property of the http request options. for eg.
 
+```ts
     getIncidentList(paramsData) {
-    const params: HttpParams = this.utils.buildParams(paramsData);
-    return this.httpClient
-    .get<IncidentListResponse>(`/application/incidents/`, {
-    params,
-    withCredentials: true
-    })
-    .catch((error) => Observable.throw(error))
-    .map((res) => res.item)
+        const params: HttpParams = this.utils.buildParams(paramsData);
+        return this.httpClient
+            .get<IncidentListResponse>(`/application/incidents/`, {
+            params, withCredentials: true })
+            .catch((error) => Observable.throw(error))
+            .map((res) => res.item)
     }
+```
 
 *   If there is only 1 property to add in http params you need to append with API endpoint then use `new HttpParams().set`
 
-    function setUserid( userId: string) {
-    const params: HttpParams = new HttpParams().set('userId', userId);
+```ts
+function setUserid(userId: string) {
+    const params: HttpParams = new HttpParams().set("userId", userId);
     return this.httpClient.getWhatever(`/api/endpoint`, { params });
     // this will turns into `/api/enpoint?userId={userId}`
-    }
+}
+```
 
 *   set second argument null if there is no data in put or post verb
 
+```ts
     .put(`/user/resend`, null, { params, withCredentials: true })
+```
 
 *   set method output `void` if it does not return enything, for eg. we are stoing data on sesssion storage or logout
 
+```ts
     private setSession(response: AuthTokenResponse): void {}
+```
