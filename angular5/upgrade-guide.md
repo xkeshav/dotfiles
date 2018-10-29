@@ -79,21 +79,27 @@ rxjs 5.5.12
 
 ---
 
-now I run `ng serve` and it throws error in below line
+now run `ng serve` and it throws error in below line
 
+```ts
 export class GlobalErrorHandler extends ErrorHandler {
-constructor(private injector: Injector) {
-super(true); <<
+   constructor(private injector: Injector) {
+   super(true); << here
 }
+```
 
-remove argument from `ErrorHandler` constructour change `super(true)` => to `super()`
+So remove argument from `ErrorHandler` constructour change `super(true)` => to `super()`
 
-again run `ng serve` and it throws error
+again run `ng serve` and now it throws different error
 
-> WARNING in ./node_modules/angular-io-slimscroll/node_modules/@angular/core/@angular/core.es5.js
-> 5659:15-36 Critical dependency: the request of a dependency is an expression
+```bash
+WARNING in ./node_modules/angular-io-slimscroll/node_modules/@angular/core/@angular/core.es5.js
+5659:15-36 Critical dependency: the request of a dependency is an expression
+```
 
-To fix this reinstall latest version of the faulty library, in my case it is `angular-io-slimscroll` , Please check angular 5 compataible version for the package as many of the package is not for angular 6. so did
+To fix this:
+
+reinstall latest version of the faulty library, in my case it is `angular-io-slimscroll`,dont forget to check angular 5 compataible version for the  libraries as many of the libraries latest version is compatiable with angular 6.
 
 `npm uninstall angular-io-slimscroll`
 
@@ -101,63 +107,69 @@ To fix this reinstall latest version of the faulty library, in my case it is `an
 
 again run `ng serve`
 
-it will throw error for Missing \*.ts files for some node_modules
+it will throw error for Missing \*.ts files for some *node_modules*
 
-```
+```bash
     ERROR in ../node_modules/ng-multiselect-dropdown/**/*.ts
 
     index.ts is missing from the TypeScript compilation. Please make sure it is in your tsconfig via the 'files' or 'include' property.
 ```
 
-you can see similar errors for different 3rd party libraries which you are cunntly using
+you can see similar errors for different 3rd party libraries which you are cunntly using in your peoject
 
-to fix this
+To fix this: 
 
-first note the _node_modules_ packages which throws such errors
+first note all _node_modules_ packages which throw this kind of error
 
-now
+now open _.angular-cli.json_ and add below line inside `defaults` property
 
-open _.angular-cli.json_ and add below line inside `defaults` property
-
-```
+```json
  "defaults": {
         "build": { "preserveSymlinks": true }
         }
 ```
 
-open _tsconfig.app.json_ add those library inside `include` property
+also open _tsconfig.app.json_ add those library inside `include` property
 
+```json
          "include": [
         "./**/*.ts",
         "../node_modules/ng-multiselect-dropdown/**/*.ts",
         "../node_modules/ngx-trim-directive/**/*.ts",
         "../node_modules/squeezebox/**/*.ts"
     ]
+ ```
 
-now run `ng serve`
+
+run `ng serve`
 
 ALL works fine.
+
+----
+
 
 Note: in angular v5 you can run `ng-serve --aot` also, which was introduced in this version
 
 also run `ng build --aot` and check and fix the errors if any as they are very decsriptive.
 
-additionaly changes you can do
+additionaly changes you can do in _tsconfig.json_ 
 
-in _tsconfig.json_ add
-
-```
+```json
 "angularCompilerOptions": {
-        "preserveWhitespaces": false
+     "preserveWhitespaces": false
 }
 ```
 
-* change individual rxjs operators into one import line from `'rxjs/operators'` and use `.pipe()`
-* rename below operators
-  * catch --> catchError
-  * do --> tap
-  * finally --> finalize
-* Observable.of() -> of
+# REFACTOR CODE 
+
+* change individual rxjs operators into one import line from `'rxjs/operators'` and use `.pipe()` 
+* Rename below operators ( although old is working but will be deprecated soon)
+  - `catch` --> `catchError`
+  - `do` --> `tap`
+  - `finally` --> `finalize`
+* `Observable.of()` -> `of`
+
+## Example
 
 old code in angular 4
 
@@ -180,7 +192,7 @@ checkAccess() {
 }
 ```
 
-new code in angular 5
+refactored code in angular 5
 
 ```
 import { finalize, map, take, tap  } from 'rxjs/operators';
