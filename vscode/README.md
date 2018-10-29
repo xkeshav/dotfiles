@@ -43,3 +43,39 @@ install (tslint)[https://marketplace.visualstudio.com/items?itemName=eg2.tslint]
 add below text in _tslint.json_ to make compatible with prettier plugin
 
 "extends": ["tslint:latest", "tslint-config-prettier"]
+
+---
+
+## User snippets
+
+click on Code -> Preferences -> User Snippets.
+
+You will then be prompted to choose a language. Choose HTML. write below snippet which will create a snippet of copy string/text with interpolate syntax on html files
+
+```
+{
+    "interpolate": {
+        "prefix": "inter",
+        "body": ["{{ ${CLIPBOARD} |json }}"],
+        "description": "Interpolate this"
+    }
+}
+```
+
+save as _html.json_
+
+Now you can either apply thi snippet using F1 or you can create a keybindings for this
+
+add key bindings for this snippet in _keybindings.json_
+
+```js
+{
+    "key": "shift+cmd+I",
+    "command": "editor.action.insertSnippet",
+    "when": "editorTextFocus",
+    "args": {
+      "langId": "html",
+      "name": "interpolate"
+    }
+  }
+```

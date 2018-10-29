@@ -1,8 +1,10 @@
 # Angular 4 Style Guide
 
-### interfaces.ts
+## Interfaces and namespace
 
-```js
+Define interface where API response is returning and Add typing of response ahead to http verb:
+
+```ts
 export interface ResponseData {
     code: number;
     message: string;
@@ -10,12 +12,14 @@ export interface ResponseData {
 }
 
 export interface Color {
-    id: string;
+    readonly id: string; // use `readonly` if it is not going to re-assign
     code: string;
     name: string;
     value: number;
 }
 ```
+
+---
 
 ### color.service.ts
 
@@ -35,32 +39,29 @@ class ColorService {
         });
     }
 
-    getColors() {
+    getColorList() {
         return this.httpClient
-            .get<ColorArrayResponse>(`${BASE_URL}/color`, { headers: this.headers }).map((res) => {
-                return res.items;
-            });
+            .get<ColorListResponse>(`/color`, { headers: this.headers })
+            .map((res) => res.items);
     }
 
-    getColorById(id) {
-        const params = new HttpParams().set('id', id);
-        // url would be http://end/point/color?id=<id>
+    getColorById(colorId) {
+        const params = new HttpParams().set('colorId', colorId);
+        // url would be http://base/url/color?colorId=<colorId>
         return this.httpClient
-            .get<ColorResponse>(`${BASE_URL}/color/`, { headers: this.headers, params }).map((res) => {
-                return res.item;
-        });
+            .get<ColorResponse>(`/color/`, { headers: this.headers, params })
+            .map((res) => res.item);
     }
-    // @param formdata = { id: '', code: '00ff00',  name: 'red', value: 25 }
+    // @params formdata = { id: '', code: '00ff00',  name: 'red', value: 25 }
     updateColor(formdata) {
         return this.httpClient
-            .post<ColorResponse>(`${BASE_URL}/color/`, formdata, { headers: this.headers }).map((res) => {
-                return res.item;
-            });
+            .put<ColorResponse>(`/color/`, formdata)
+            .map((res) => res.item);
     }
 
 }
 
-interface ColorArrayResponse extends ResponseData {
+interface ColorListResponse extends ResponseData {
     items: Color[];
 }
 
@@ -86,8 +87,7 @@ class ColorComponent extends OnInit {
 
     constructor ( private colorService: ColorService) {}
 
-    this.colorService.getColors().subscribe( (data) => {
-        // do some action on data and return
+    this.colorService.getColorList().subscribe( (data) => {
         this.colors = data;
     }, (err) => {
         // handle error
@@ -97,33 +97,29 @@ class ColorComponent extends OnInit {
 
 ---
 
-## HTML
+1.  Use array notation instead of dot natation to access property object in html
 
-*   use array notation of property of object in html
+dot notation
 
-```js
-{
-    {
-        user.firstName;
-    }
-}
+```html
+{{ user.firstName }} // may display the error with squiggling lines in IDE
 ```
 
-will give the error squigglies
+array notation
 
-```js
-{
-    {
-        user["fisrtName"];
-    }
-}
+```html
+{{ user['firstName'] }}
 ```
 
-is the proper way
+2.  Class property visibility identifier
 
-*   always make property public ( default visibility is public) if it is being used in html
+    *   `public`
+        *   if it is being used in html ( for eg any method or variable name which bind in html) - default is public
+    *   `private`
+        *   if it is only used within component class members.
+        *   service instance which is written in `constructor()`.
 
-*   use built-in structuctural directive
+3.  use built-in structural directive
 
 ```html
 <ng-template ngFor let-app [ngForOf]="userDetails.roles">
@@ -137,20 +133,19 @@ below is the similar can be done in shorter way
 <div *ngFor="let app for userDetail['roles']">{{app.name}}</div>
 ```
 
-*   use `[InnerHTML]` instead of interploation `{{}}` when value is not changing in HTML
+*   use `[InnerHTML]` instead of interpolation `{{}}` when value is not changing in HTML
 
 <p [InnerHTML]="''.concat(user.firstName, ' ', user.lastName)"></p>
 
-*   error undefiend supress method
-    use `firstName?.errors?.required`
+*   error of `undefined` , way use (?) for eg. `firstName?.errors?.required`
 
 ---
 
 # Component
 
-*   must have `ngOninit()` and `constructor()`
+*   must have `constructor()`
 
-*   `constructor()` have all attribute initialization place mostly Boolean
+    `constructor()` have all attribute initialization place mostly Boolean
 
 *   all services initialization with `private` keyword
 
@@ -331,73 +326,3 @@ correct one is
     data.map( (item) => item.toUpperCase());
     // here item is shadowed varaible
     }
-
-## Service File Conventions
-
-*   Write service name and parameters self explanatory ( camelCase)
-
-```ts
-    getProcessesForApplicationInstance(id: string, data) X
-
-    getProcessListByInstance(instanceId:string, formdata) ✓
-```
-
-*   Add typing of response ahead to http verb: for eg:
-
-```ts
-    getProcessList(appId: string) {
-        return this.httpClient
-            .get<ProcessListResponse>(`/application/${appId}/processes, {
-               withCredentials: true })
-            .catch((error) => Observable.throw(error))
-            .map((res) => res.item);
-    }
-    export interface ProcessListResponse extedns StandardResponseData{
-    item: Process[];
-    }
-```
-
-*   Either add typing ahead to function name when there is DELETE or PUT request, for eg:
-
-```ts
-    deleteApplication(appId: string): Observable<any> {
-    return this.httpClient
-    .delete(`/application/${appId}`, { withCredentials: true })
-    .catch((error) => Observable.throw(error));
-    }
-```
-
-*   If there is params data then argument name would be `paramsData` and assign it to `params` so that we can use params property of the http request options. for eg.
-
-```ts
-    getIncidentList(paramsData) {
-        const params: HttpParams = this.utils.buildParams(paramsData);
-        return this.httpClient
-            .get<IncidentListResponse>(`/application/incidents/`, {
-            params, withCredentials: true })
-            .catch((error) => Observable.throw(error))
-            .map((res) => res.item)
-    }
-```
-
-*   If there is only 1 property to add in http params you need to append with API endpoint then use `new HttpParams().set`
-
-```ts
-function setUserid(userId: string) {
-    const params: HttpParams = new HttpParams().set("userId", userId);
-    return this.httpClient.getWhatever(`/api/endpoint`, { params });
-    // this will turns into `/api/enpoint?userId={userId}`
-}
-```
-
-*   set second argument null if there is no data in put or post verb
-
-```ts
-    .put(`/user/resend`, null, { params, withCredentials: true })
-```
-
-*   set method output `void` if it does not return enything, for eg. we are stoing data on sesssion storage or logout
-
-```ts
-    private setSession(response: AuthTokenResponse): void {}
-```

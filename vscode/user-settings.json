@@ -35,7 +35,6 @@
     "prettier.singleQuote": true,
     "prettier.tabWidth": 2,
     "prettier.eslintIntegration": true,
-    "workbench.colorTheme": "JSFiddle-like-syntax-vscode",
     "editor.selectionHighlight": true,
     "terminal.integrated.copyOnSelection": true,
     "window.title": "${activeEditorMedium}${separator}${rootName}",
@@ -50,8 +49,14 @@
         "editor.quickSuggestions": false
     },
     "files.exclude": {
+        ".vscode": false,
+        "*.code-workspace": true,
+        "**/.DS_Store": true,
         "**/.git": true,
-        "**/.DS_Store": true
+        "**/.svn": true,
+        "*/*.d.ts": true,
+        "*/polyfills.ts": true,
+        "node_modules/": true
     },
     "search.exclude": {
         "node_modules/": true,
@@ -86,21 +91,29 @@
     "editor.find.seedSearchStringFromSelection": true,
     "window.openFilesInNewWindow": "off",
     "editor.scrollBeyondLastLine": true,
-    "editor.tabCompletion": false,
+    "editor.tabCompletion": "on",
     "gitlens.advanced.messages": {
         "suppressShowKeyBindingsNotice": true
     },
     "gitlens.historyExplorer.enabled": true,
-    "gitlens.mode.active": "zen",
+    "gitlens.mode.active": "review",
     "gitlens.gitExplorer.location": "explorer",
     "gitlens.historyExplorer.location": "scm",
     "gitlens.resultsExplorer.location": "explorer",
     "typescript.preferences.quoteStyle": "single",
     "typescript.preferences.importModuleSpecifier": "relative",
     "typescript.updateImportsOnFileMove.enabled": "always",
-    "typescript.showUnused": true,
     "files.hotExit": "onExit",
     "debug.toolBarLocation": "floating",
     "workbench.editor.openSideBySideDirection": "down",
-    "cSpell.userWords": ["Keshav", "formdata", "postdata", "progressbar", "readonly", "toastr"]
+    "less.validate": false,
+    "vscode-open-project.projects": {
+        "justcode": "/opt/virsec-repo/Zeus/",
+        "dofiles": "/opt/dotfiles/",
+        "wizard": "/opt/step-wizard"
+    },
+    "breadcrumbs.enabled": true,
+    "breadcrumbs.symbolPath": "last",
+    "breadcrumbs.filePath": "last",
+    "workbench.colorTheme": "Quiet Light"
 }
