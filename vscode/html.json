@@ -1,0 +1,12 @@
+
+{
+    "interpolate": {
+        "prefix": "inter",
+        "body": ["{{ ${CLIPBOARD} |json }}"],
+        "description": "Interpolate this"
+    }
+}
+
+
+
+
