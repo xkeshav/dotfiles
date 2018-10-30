@@ -1,14 +1,17 @@
-Upgrading from angular 4 to angular 5
+# Upgrading application from Angular 4 to Angular 5
 
-get help from https://update.angular.io/ to make necessary changes; choose advance options for application complexity
+-   Old version _v 4.4.2_
+-   New version _v 5.5.12_
 
-and do the suggested changes if you have implemented in your current applications. most important are followings.
+first get help from https://update.angular.io/ to get detail of all necessary changes, choose advance option for application complexity.
 
-* Remove @angular/http and replace with '@angular/common/http'
+And do the suggested changes if you have implemented those modules/options in your current application. Most important are followings.
+
+-   Remove **@angular/http** and replace with **@angular/common/http**
 
 Replace
 
-```
+```ts
 import { HttpModule } from '@angular/http';
 
 imports: {
@@ -18,17 +21,16 @@ imports: {
 
 with
 
-```
+```ts
 import { HttpClientModule } from '@angular/common/http';
 imports: {
      HttpClientModule,
 }
 ```
 
-* change `<template>` with `<ng-template>` if you have used.
-* change in date pipe.
+-   Change `<template>` with `<ng-template>` .
 
-2.  now install angular 5 libraries with below command
+2.  Now install angular 5 compatible libraries with below command
 
 `npm install @angular/{animations,common,compiler,compiler-cli,core,forms,http,platform-browser,platform-browser-dynamic,platform-server,router}@^5.2.0 typescript@2.4.2 rxjs@^5.5.2`
 
@@ -36,15 +38,13 @@ imports: {
 
 That's ALL.
 
-* for precaution you can remove _node_modules_ directory and _package-lock.json_ file and run
+Note: for pre-caution you can remove _node_modules_ directory and _package-lock.json_ file and run
 
-  * npm cache clean --force
-  * npm install
-  * Repeat step 2
+    -   npm cache clean --force
+    -   npm install
+    -   Repeat step 2
 
-* check all version with
-
-> ng -v
+-   You can check all version with `ng -v`
 
 ```
     _                      _                 ____ _     ___
@@ -88,9 +88,9 @@ export class GlobalErrorHandler extends ErrorHandler {
 }
 ```
 
-So remove argument from `ErrorHandler` constructour change `super(true)` => to `super()`
+So remove argument from `ErrorHandler` constructor change `super(true)` => to `super()`
 
-again run `ng serve` and now it throws different error
+again run `ng serve` and now it throws these errors
 
 ```bash
 WARNING in ./node_modules/angular-io-slimscroll/node_modules/@angular/core/@angular/core.es5.js
@@ -99,7 +99,7 @@ WARNING in ./node_modules/angular-io-slimscroll/node_modules/@angular/core/@angu
 
 To fix this:
 
-reinstall latest version of the faulty library, in my case it is `angular-io-slimscroll`,dont forget to check angular 5 compataible version for the  libraries as many of the libraries latest version is compatiable with angular 6.
+reinstall latest version of the faulty library, in my case it's `angular-io-slimscroll`,dont forget to check angular 5 compataible version for the library as many of the libraries has been developed with compatible of latest angular version (v6 or v7).
 
 `npm uninstall angular-io-slimscroll`
 
@@ -107,7 +107,7 @@ reinstall latest version of the faulty library, in my case it is `angular-io-sli
 
 again run `ng serve`
 
-it will throw error for Missing \*.ts files for some *node_modules*
+it will throw error for Missing **\*.ts** files for some _node_modules_
 
 ```bash
     ERROR in ../node_modules/ng-multiselect-dropdown/**/*.ts
@@ -115,18 +115,18 @@ it will throw error for Missing \*.ts files for some *node_modules*
     index.ts is missing from the TypeScript compilation. Please make sure it is in your tsconfig via the 'files' or 'include' property.
 ```
 
-you can see similar errors for different 3rd party libraries which you are cunntly using in your peoject
+you can see the list of similar errors for different 3rd party libraries which you are currently using
 
-To fix this: 
+To fix this:
 
-first note all _node_modules_ packages which throw this kind of error
+first note all _node_modules_ packages which throws this kind of error
 
 now open _.angular-cli.json_ and add below line inside `defaults` property
 
 ```json
  "defaults": {
         "build": { "preserveSymlinks": true }
-        }
+ }
 ```
 
 also open _tsconfig.app.json_ add those library inside `include` property
@@ -138,21 +138,19 @@ also open _tsconfig.app.json_ add those library inside `include` property
         "../node_modules/ngx-trim-directive/**/*.ts",
         "../node_modules/squeezebox/**/*.ts"
     ]
- ```
+```
 
+Now run `ng serve`
 
-run `ng serve`
+**All works fine.**
 
-ALL works fine.
-
-----
-
+---
 
 Note: in angular v5 you can run `ng-serve --aot` also, which was introduced in this version
 
-also run `ng build --aot` and check and fix the errors if any as they are very decsriptive.
+also run `ng build --aot` and check and fix the errors if any as they are very descriptive.
 
-additionaly changes you can do in _tsconfig.json_ 
+additionally you can do the changes in _tsconfig.json_
 
 ```json
 "angularCompilerOptions": {
@@ -160,14 +158,16 @@ additionaly changes you can do in _tsconfig.json_
 }
 ```
 
-# REFACTOR CODE 
+-   you can update angular-cli version also; both globally and locally to **v 1.7.2**
 
-* change individual rxjs operators into one import line from `'rxjs/operators'` and use `.pipe()` 
-* Rename below operators ( although old is working but will be deprecated soon)
-  - `catch` --> `catchError`
-  - `do` --> `tap`
-  - `finally` --> `finalize`
-* `Observable.of()` -> `of`
+# REFACTOR CODE
+
+-   change individual rxjs operators into one import line from `'rxjs/operators'` and use `.pipe()`
+-   Rename below operators ( although old is working but will be deprecated soon)
+    -   `catch` --> `catchError`
+    -   `do` --> `tap`
+    -   `finally` --> `finalize`
+-   `Observable.of()` -> `of`
 
 ## Example
 
