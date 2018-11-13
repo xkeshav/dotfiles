@@ -1,13 +1,45 @@
 # Upgrading application from Angular 4 to Angular 5
 
--   Old version _v 4.4.2_
--   New version _v 5.5.12_
+* Old version _v 4.4.2_
+* New version _v 5.5.12_
+
+> ng -v
+
+    _                      _                 ____ _     ___
+
+/ \ _ \_\_ \_\_ _ \_ _| | \_\_ _ \_ ** / \_**| | |\_ _|
+/ △ \ | '_ \ / _` | | | | |/ _` | '**| | | | | | |
+/ \_** \| | | | (_| | |_| | | (\_| | | | |**_| |_** | |
+/_/ \_\_| |_|\_\_, |\__,_|\_|\__,_|\_| \_**\_|\_\_\_**|**_|
+|_**/
+
+Angular CLI: 1.6.7
+Node: 8.9.2
+OS: darwin x64
+Angular: 4.4.6
+... animations, common, compiler, compiler-cli, core, forms
+... http, language-service, platform-browser
+... platform-browser-dynamic, router, tsc-wrapped
+
+@angular/cli: 1.6.7
+@angular-devkit/build-optimizer: 0.0.42
+@angular-devkit/core: 0.0.29
+@angular-devkit/schematics: 0.0.52
+@ngtools/json-schema: 1.1.0
+@ngtools/webpack: 1.9.7
+@schematics/angular: 0.1.17
+typescript: 2.3.4
+webpack: 3.10.0
+
+rxjs 5.1.0
+
+---
 
 first get help from https://update.angular.io/ to get detail of all necessary changes, choose advance option for application complexity.
 
 And do the suggested changes if you have implemented those modules/options in your current application. Most important are followings.
 
--   Remove **@angular/http** and replace with **@angular/common/http**
+* Remove **@angular/http** and replace with **@angular/common/http**
 
 Replace
 
@@ -28,7 +60,7 @@ imports: {
 }
 ```
 
--   Change `<template>` with `<ng-template>` .
+* Change `<template>` with `<ng-template>` .
 
 2.  Now install angular 5 compatible libraries with below command
 
@@ -44,7 +76,7 @@ Note: for pre-caution you can remove _node_modules_ directory and _package-lock.
     -   npm install
     -   Repeat step 2
 
--   You can check all version with `ng -v`
+* You can check all version with `ng -v`
 
 ```
     _                      _                 ____ _     ___
@@ -158,16 +190,16 @@ additionally you can do the changes in _tsconfig.json_
 }
 ```
 
--   you can update angular-cli version also; both globally and locally to **v 1.7.2**
+* you can update angular-cli version also; both globally and locally to **v 1.7.2**
 
 # REFACTOR CODE
 
--   change individual rxjs operators into one import line from `'rxjs/operators'` and use `.pipe()`
--   Rename below operators ( although old is working but will be deprecated soon)
-    -   `catch` --> `catchError`
-    -   `do` --> `tap`
-    -   `finally` --> `finalize`
--   `Observable.of()` -> `of`
+* change individual rxjs operators into one import line from `'rxjs/operators'` and use `.pipe()`
+* Rename below operators ( although old is working but will be deprecated soon)
+  * `catch` --> `catchError`
+  * `do` --> `tap`
+  * `finally` --> `finalize`
+* `Observable.of()` -> `of`
 
 ## Example
 
