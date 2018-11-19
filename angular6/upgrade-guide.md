@@ -22,7 +22,7 @@ Make sure you are in same folder as node_modules of your project. You can delete
 `5. npm uninstall --save-dev angular-cli`
 This will remove old angular-cli from your package.json.
 
-`6. npm install --save-dev @angular/cli@l6.1`
+`6. npm install --save-dev @angular/cli@l6.1`
 This will install mentioned version of angular cli as development dependency.
 
 `7. ng update @angular/cli`
@@ -41,7 +41,7 @@ Using the current set of rules allows you to automatically migrate your project 
 
 Note: if you have faced Typescript error, then install typescript globally by `npm install -g typescript`
 
-`11. npm install rxjs-compat --save-dev`
+`11. npm install rxjs-compat --save-dev`
 New changes in rxjs will probably break your code, with installation of this package you will provide backward-compatibility of RxJS.
 
 Note: Once all of your dependencies have updated to RxJS 6, remove rxjs-compat as it increases bundle size. please see this [RxJS Upgrade Guide](https://github.com/ReactiveX/rxjs/blob/master/docs_app/content/guide/v6/migration.md) for more info. `npm uninstall rxjs-compat`
@@ -52,9 +52,11 @@ Now, if you faced incompatible dependency issues then uninstall the package and 
 
 That's ALL.
 
--   You can check all version with `ng -v`
+-   `ng version`
+
 ```
-   _                      _                 ____ _     ___
+
+     _                      _                 ____ _     ___
     / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
    / △ \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
   / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
@@ -62,8 +64,8 @@ That's ALL.
                 |___/
 
 
-Angular CLI: 6.1.5
-Node: 8.12.0
+Angular CLI: 7.0.6
+Node: 8.9.2
 OS: darwin x64
 Angular: 6.1.10
 ... animations, common, compiler, compiler-cli, core, forms
@@ -72,53 +74,120 @@ Angular: 6.1.10
 
 Package                           Version
 -----------------------------------------------------------
-@angular-devkit/architect         0.7.5
-@angular-devkit/build-angular     0.7.5
-@angular-devkit/build-optimizer   0.7.5
-@angular-devkit/build-webpack     0.7.5
-@angular-devkit/core              0.7.5
-@angular-devkit/schematics        0.7.5
-@angular/cli                      6.1.5
-@ngtools/webpack                  6.1.5
-@schematics/angular               0.7.5
-@schematics/update                0.7.5
+@angular-devkit/architect         0.10.6
+@angular-devkit/build-angular     0.10.6
+@angular-devkit/build-optimizer   0.10.6
+@angular-devkit/build-webpack     0.10.6
+@angular-devkit/core              7.0.6
+@angular-devkit/schematics        7.0.6
+@angular/cli                      7.0.6
+@ngtools/webpack                  7.0.6
+@schematics/angular               7.0.6
+@schematics/update                0.10.6
 rxjs                              6.3.3
 typescript                        2.9.2
-webpack                           4.9.2
+webpack                           4.19.1
 
 ```
+
 Now run `ng serve`
 
 **All works fine.**
+
 # REFACTOR CODE
 
--   change individual rxjs operators into one import line from `'rxjs/operators'` and use `.pipe()`
--   Rename below operators ( although old is working but will be deprecated soon)
-    -   `catch` --> `catchError`
-    -   `do` --> `tap`
-    -   `finally` --> `finalize`
--   `Observable.of()` -> `of`
-
 -   RxJs 6 changes
-    - Changes to import paths
+
+    -   Changes to import paths
         The recommendation for TypeScript developers is to use `rxjs-tslint` to refactor import paths.
 
-    - The following rules have been designed by the RxJS team to help JavaScript developers refactor import paths:
+    -   The following rules have been designed by the RxJS team to help JavaScript developers refactor import paths:
 
-        -   rxjs: Contains creation methods, types, schedulers, and utilities.
-        ```import { Observable, Subject, pipe, of, from, interval, merge, fromEvent } from "rxjs";```
-        -   rxjs/operators: Contains all pipeable operators.
-        ```import { map, filter, scan } from "rxjs/operators";```
-        -   rxjs/webSocket: Contains the web socket subject implementation.
-        ```import { webSocket } from "rxjs/webSocket";```
-    - Uses Functions instead of Classes
-        - Functions have replaced classes that operate on observables. All observable classes have been removed.
-        For example:
-            ```
-            // removed
-            TimeObservable.create(0, 1000)
+        -   _rxjs_ : contains creation methods, types, schedulers, and utilities.
 
-            // use instead
+        ```typescript
+        import {
+            Observable,
+            Subject,
+            pipe,
+            of,
+            from,
+            interval,
+            merge,
+            fromEvent
+        } from 'rxjs';
+        ```
 
-            timer(0,1000)
-            ```
+        -   _rxjs/operators_ : contains all pipeable operators.
+
+        ```typescript
+        import { map, filter, scan } from 'rxjs/operators';
+        ```
+
+        -   _rxjs/webSocket_ : contains the web socket subject implementation.
+
+        ```typescript
+        import { webSocket } from 'rxjs/webSocket';
+        ```
+
+    -   Uses functions instead of Classes
+
+        -   Functions have replaced classes that operate on observables. All observable classes have been removed.
+            For example, `TimeObservable.create(0, 1000)` been replaced with `timer(0,1000)`
+
+### Sample Snippet Angular 6 Syntax
+
+-   Import individual operator from _rxjs/operators_ which is chainable in `.pipe()`
+-   Import observable creator methods from _rxjs_ instead of deep import individually.
+
+> before
+
+```typecript
+    import 'rxjs/add/operator/map';
+    import { Observable } from 'rxjs/Observable';
+
+    Observable.of(dataSource);
+    .catch((error) => Observable.throw(error));
+    .map((response) => response.item)
+    .finally(() => (formSubmitted = false))
+```
+
+> after
+
+```typecript
+import { throwError, Observable, of } from 'rxjs';
+import { map, catchError, finalize } from 'rxjs/operators';
+
+of(dataSource).pipe(
+    catchError((error) => throwError(error)),
+    map((response) => response.item),
+    finalize(() => (formSubmitted = false))
+);
+```
+
+---
+
+> before
+
+```typescript
+import { Subscription } from 'rxjs/Subscription';
+import { Subject } from 'rxjs/Subject';
+import { TimerObservable } from 'rxjs/observable/TimerObservable';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+
+TimerObservable.create(0, this.interval)
+    .switchMap(() => live$)
+    .takeUntil(this.applicationDetailUnsubscribe);
+```
+
+> after
+
+```typescript
+import { Subscription, Subject, timer, forkJoin } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
+
+timer(0, this.interval).pipe(
+    switchMap(() => live$),
+    takeUntil(this.applicationDetailUnsubscribe)
+);
+```
