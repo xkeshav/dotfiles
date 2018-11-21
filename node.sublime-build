@@ -1,4 +1,0 @@
-{
-    "shell_cmd": "babel-node ${file}",
-    "selector": "source.js"
-}

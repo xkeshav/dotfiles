@@ -191,3 +191,29 @@ timer(0, this.interval).pipe(
     takeUntil(this.applicationDetailUnsubscribe)
 );
 ```
+
+---
+
+# Upgrade Manually
+
+Following steps need to be follow when we have switch to a branch from angular 4 to angular 6 and we have updated _package.json_ but yet not install anything and we have older packages and libraries in our _node_modules_. follow these steps from root path i.e. where we have _node_modules_ directory
+
+older version: 4.4.3
+newer version 6.1.10
+
+##Steps
+
+1. delete `node_modules` directory and `package-lock.json` from the root folder, manually or using terminal
+   `sudo rm -rf node_modules package-lock.json`
+2. uninstall global angular cli
+   `npm uninstall -g angular-cli`
+3. re install latest angular cli ( most compatibale to angular 6) globallay
+   `npm install -g @angular/cli@7.0.4`
+4. clear node module cache using
+   `npm cach clean --force`
+5. install angular cli locally
+   `npm install --save-dev @angular/cli@7.0.4`
+6. install third party liabrary compatible to latest angular version
+   `npm install`
+7. now run Front-end
+   `ng run zeus:serve`
