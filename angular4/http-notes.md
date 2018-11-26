@@ -7,7 +7,7 @@ Before you can use the HttpClient, you need to install the HttpClientModule whic
 // app.module.ts:
 
 ```ts
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -25,7 +25,7 @@ return this.httpClient
   .map((res) => res.item);
 ```
 
-* if _post_ / _put_ then second argument of httpclient class is the body of request.Keep null or {} if no body
+- if _post_ / _put_ then second argument of httpclient class is the body of request.Keep null or {} if no body
 
 ```ts
     .put(`/user/resend`, null, { params, withCredentials: true })
@@ -74,7 +74,7 @@ return this.httpClient
 
 ## Service File Conventions
 
-* Write service name and parameters self explanatory ( camelCase)
+- Write service name and parameters self explanatory ( camelCase)
 
 ```ts
     getProcessesForApplicationInstance(id: string, data) X
@@ -82,9 +82,9 @@ return this.httpClient
     getProcessListByInstance(instanceId:string, formdata) ✓
 ```
 
-* Add typing of response ahead to http verb: for eg:
+- Add typing of response ahead to http verb: for eg:
 
-- Add typing ahead to function name when there is DELETE or PATCH request and e are not sure about the response object shape, for eg:
+* Add typing ahead to function name when there is DELETE or PATCH request and e are not sure about the response object shape, for eg:
 
 ```ts
     deleteApplication(appId: string): Observable<any> {
@@ -96,9 +96,9 @@ return this.httpClient
 
 ## HttpParams
 
-* If any http request requires query params than we do it with `HttpParams`
-* `params` is the key name which hold query parameters data as 3rd argument of http request
-* we can create a method which create query params object
+- If any http request requires query params than we do it with `HttpParams`
+- `params` is the key name which hold query parameters data as 3rd argument of http request
+- we can create a method which create query params object
 
 ```ts
     buildParams(paramList: object) {
@@ -121,18 +121,44 @@ return this.httpClient
     }
 ```
 
-* If there is only 1 property you need to append with API endpoint then use directly
+- If there is only 1 property you need to append with API endpoint then use directly
 
 ```ts
 function setUserid(userId: string) {
-  const params: HttpParams = new HttpParams().set("userId", userId);
+  const params: HttpParams = new HttpParams().set('userId', userId);
   return this.httpClient.getWhatever(`/api/endpoint`, { params });
   // this will turns into `/api/enpoint?userId={userId}`
 }
 ```
 
-* set method output `void` if it does not return enything, for eg. we are stoing data on sesssion storage or logout
+- set method output `void` if it does not return enything, for eg. we are stoing data on sesssion storage or logout
 
 ```ts
     private setSession(response: AuthTokenResponse): void {}
+```
+
+# example
+
+```javascript
+this.httpClient
+.get<ResponseType>(`/end/point?os=` + os + `&appID=` + id`,
+  {withCredentials: true});
+```
+
+// better way to utilize template literal syntax properly as below
+
+```javascript
+this.httpClient.get <
+  ReponseType >
+  (`/end/point?os=${os}&appID=${id}`, { withCredentials: true });
+```
+
+and more valid way is using `HttpParams` as following and note the we also change parameter name self explanatory.
+
+```javacsript
+    const params: HttpParams = new HttpParams()
+            .set('os', os)
+            .set('appID', appID);
+    this.httpClient
+            .get<ResponeType>(`/end/point`, { params, withCredentials: true });
 ```
