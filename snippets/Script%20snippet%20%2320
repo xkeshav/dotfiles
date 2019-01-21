@@ -1,0 +1,57 @@
+{
+  Date.prototype.getWeekOfMonth = function() {
+  var firstWeekday = new Date(this.getFullYear(), this.getMonth(), 1).getDay();
+  var offsetDate = this.getDate() + firstWeekday - 1;
+  return Math.floor(offsetDate / 7);
+}
+
+
+    const now = new Date();
+    const [date, day, week, month, timezone ] = [now.getDate(), now.getDay(), now.getWeekOfMonth(), now.getMonth() + 1, now.getTimezoneOffset()];
+    console.log({date, day, week, month, timezone });
+
+    const input = [
+ {"k": "Name1", "val": [{"s": 33, "d": "sa"}, {"s": 1, "d": "as"}, {"s": 56, "d": "te"}]},
+ {"k": "Name2", "val": [{"s": 31, "d": "re"}, {"s": 4, "d": "sa"}, {"s": 1, "d": "ba"}]}
+];
+
+const output = input.reduce( (prev, element) => {
+  const ni = element;
+
+  Object.assign({}, ni, {val: element.val.sort((a,b) => a.s- b.s)});
+  console.log({ni});
+  return prev.concat(ni);
+
+},[])
+
+console.log({output});
+
+var exampleArray = [ [1,2,3,4], [1,2,[1,2,3]], [1,2,3,4,5,[1,2,3,4,[1,2,3,4]]] ];
+
+const flatten = (items) => {
+  const flat = [];
+
+  items.forEach(item => {
+    if (Array.isArray(item)) {
+      flat.push(...flatten(item));
+    } else {
+      flat.push(item);
+    }
+  });
+
+  return flat;
+}
+
+
+const do_flat = (arr) =>  arr.map( (curr) =>  {
+ let len = flatten(curr).length;
+ console.log({len});
+   return len
+});
+
+const output_ = do_flat(exampleArray);
+
+console.log(output_);
+
+
+}
