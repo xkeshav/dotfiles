@@ -1,0 +1,53 @@
+{
+	const input = [
+    {
+        "aiStatus" : "PROVISIONED",
+        "application" : "5a703de62f30d831d44afb96"
+    },
+    {
+        "aiStatus" : "PROVISIONED",
+        "application" : "5a703de62f30d831d44afb96"
+    },
+    {
+        "aiStatus" : "UNKNOWN",
+        "application" : "5a703fb72f30d803e025372a"
+    },
+    {
+        "aiStatus" : "REGISTERED",
+        "application" : "5a703fb72f30d803e025372a"
+    },
+    {
+        "aiStatus" : "PROVISIONED",
+        "application" : "5a7040352f30d803e025372b"
+    },
+    {
+        "aiStatus" : "REGISTERED",
+        "application" : "5a7040352f30d803e025372b"
+    },
+    {
+        "aiStatus" : "PROVISIONED",
+        "application" : "5a70404c2f30d803e025372c"
+    },
+    {
+        "aiStatus" : "REGISTERED",
+        "application" : "5a70404c2f30d803e025372c"
+    },
+    {
+        "aiStatus" : "PROVISIONED",
+        "application" : "5a7040612f30d803e025372d"
+    },
+    {
+        "aiStatus" : "REGISTERED",
+        "application" : "5a7040612f30d803e025372d"
+    }
+ ];
+
+ let op = input.reduce( (p, n) => {
+ 	let t = [];
+ 	t.status = n.aiStatus;
+ 	return t;
+ }, []);
+
+ console.log({op});
+
+}

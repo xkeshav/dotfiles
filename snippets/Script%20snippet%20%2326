@@ -1,0 +1,51 @@
+{
+
+    const datasets = [
+            {
+                label: "Parent 1",
+                datasets: [
+                    {
+                        label: "Child 1",
+                        dataMax: 100,
+                        datasets: 30
+                    },
+                    {
+                        label: "Child 2",
+                        dataMax: 30,
+                        datasets: 30
+                    }
+                ]
+            },
+            {
+                label: "Parent 2",
+                dataMax: 50,
+                datasets: 30
+            }
+        ]; 
+    
+    
+    
+    const modifyList = ({list, field}) => {
+      console.log('field: ', field);
+      console.log('list: ', list);
+        return list.reduce( (prev, curr) => {
+          if(field in curr) { return prev.concat([curr]);}  
+          else {
+            if(curr.datasets.length >0) {
+                const field = curr.datasets.reduce( (pds, cds) => pds += cds[field], 0);
+                const nds = Object.assign(curr, {field});
+                return prev.concat([nds]);
+            }
+          }
+    }, []);
+
+
+    }
+
+    const modifiedList = modifyList({field: 'dataMax', list: datasets });
+
+    console.log({modifiedList});
+    
+
+console.log(op);
+}
