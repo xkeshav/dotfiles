@@ -1,0 +1,4 @@
+{
+    "shell_cmd": "/usr/local/node ${file}",
+    "selector": "source.js"
+}
