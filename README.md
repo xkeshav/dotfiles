@@ -1,12 +1,15 @@
-This repo is all about style guide and Best practice for front end developer
+# DOTFILES
 
-- also include configuration files such as 
-    .bashrc 
-    - sublime-settings 
-    - .eslintrc
-    - .jshintrc
-    - .lesshintc
-    - .editorconfig
-    - .bowerrc
-    - .babelrc
-and many more
+This repo contains style guide and best practice for front end developer
+
+- also include configuration files such as
+  - .bashrc
+  - sublime-settings
+  - vs code settings
+  - .eslintrc
+  - .jshintrc
+  - .lesshintc
+  - .editorconfig
+  - .bowerrc
+  - .babelrc
+    and many more
