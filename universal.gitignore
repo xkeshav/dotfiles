@@ -33,7 +33,7 @@ desktop.ini
 .vscode/*
 *~
 
-**/log/
+# log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

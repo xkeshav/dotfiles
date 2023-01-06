@@ -1,8 +1,10 @@
-Following is the style guide for the FE project. It is recommened to follow one and be consisnet throughout the project
+# Angular Project Structure Guidelines
 
-1) root folder for FE would be **WebUI**  with following file structure
+Following is the style guide for the FE project Based on Angular 1. It is recommended to follow one and be consistent throughout the project
 
-```
+1. root folder for FE would be **WebUI** with following file structure
+
+```txt
     └── .gitignore
     ├── node_modules
     ├── webpack.config.json
@@ -11,18 +13,20 @@ Following is the style guide for the FE project. It is recommened to follow one 
     └── src
 ```
 
+## folder structure
+
 **node_modules**
 
- - all node.js package reside here.
- - **do no change** anything  inside this folder, it is not going to uploaded on production server
+- all node.js package reside here.
+- **do no change** anything inside this folder, it is not going to uploaded on production server
 
-**src** 
+  **src**
 
 - this is the top-level directory
 - following is the folder structure
 
 ```
-├── app 
+├── app
 ├── assets
 ├── favicon.ico
 ├── index.html
@@ -32,7 +36,7 @@ Following is the style guide for the FE project. It is recommened to follow one 
 
 **assets**
 
- - All static assests will be placed here
+- All static assests will be placed here
 
 ```
   ├── images
@@ -40,33 +44,32 @@ Following is the style guide for the FE project. It is recommened to follow one 
 ```
 
 All images of project will be placed under **images** folder
-  - logo.png
-  - no-whitespace-and-special-character.png
-  - all-smallcase-hypen-divided-alphanumeric.jpg
+
+- _logo.png_
+- _no- whitespace-and-special-character@.png_
+- _all-small-case-hyphen-divided-alphanumeric.jpg_
 
 **specs**
 
-  - unit testing files will be placed here.
-  - one component testing per file.
-  - file name suffixed with *.spec.js* for eg. login.spec.js
+- unit testing files will be placed here.
+- one component testing per file.
+- file name suffixed with _.spec.js_ for eg. _login.spec.js_
 
 **libs**
 
-- save extrenal library/ plugins JS files which package are not resolvable by 
-`bower install` or `npm install`
-  + FileSaver.js
-  + Moment.js
-  
- *favicon.ico* -- icon file visible in browser's top right in URL
+- save extrenal library/ plugins JS files which package are not resolvable by
+  `bower install` or `npm install`
+  - FileSaver.js
+  - Moment.js
+    _favicon.ico_ -- icon file visible in browser's top right in URL
 
-*__index.html__*
+**_index.html_**
 
- - HTML skeleton have `<head>` and `<body>` decalaration
- - enable ng-strict-di `<div ng-app="myApp" ng-strict-di>`
- - Service worker registration code will be here in `<script>` tag
+- HTML skeleton have `<head>` and `<body>` decalaration
+- enable ng-strict-di `<div ng-app="myApp" ng-strict-di>`
+- Service worker registration code will be here in `<script>` tag
 
 **app** directory has below folder structure ( Note: this is **folder-by-type** structure )
-
 
 ```
 .
@@ -92,25 +95,27 @@ All images of project will be placed under **images** folder
 
 **controllers**
 
-  - Define one controller per file.
-  - file name: lowercase, appended with *<whatever>.controller.js*
-  - component name would be pascal case suffixed with `Controller` 
-     for eg. *DashboardController*
-  - Use the `controllerAs` syntax over the classic controller with *$scope* syntax.
-  - Categorize your controllers in 2 category
-  
-     - Parent controller --controller which associated with a complete page.
-       - use controllerAS `vm`
-       - filename: *user.controller.js*
-       - controller name: `.controller('UserController', {});`
-  
-    - Child controller --  controller which are associated with modal (pop-up) page
-       - use controllerAS  `$ctrl` for child controller
-       - file name: *confirm-modal.controller.js*
-       - controller name: `.controller('ConfirmModalController', {});`
-       - All child controller template at one place under *views/templates* folder
+- Define one controller per file.
+- file name: lowercase, appended with _<whatever>.controller.js_
+- component name would be pascal case suffixed with `Controller`
+  for eg. _DashboardController_
+- Use the `controllerAs` syntax over the classic controller with _$scope_ syntax.
+- Categorize your controllers in 2 category
 
-    - Define all variables on top of controller and bind with `vm`  with `angualr.extend()` method.
+  - Parent controller --controller which associated with a complete page.
+
+    - use controllerAS `vm`
+    - filename: _user.controller.js_
+    - controller name: `.controller('UserController', {});`
+
+  - Child controller -- controller which are associated with modal (pop-up) page
+
+    - use controllerAS `$ctrl` for child controller
+    - file name: _confirm-modal.controller.js_
+    - controller name: `.controller('ConfirmModalController', {});`
+    - All child controller template at one place under _views/templates_ folder
+
+  - Define all variables on top of controller and bind with `vm` with `angualr.extend()` method.
 
 ```
 /* avoid */
@@ -136,7 +141,7 @@ function CustomerController() {
 }
 
 ```
-  
+
 - Use named functions instead of passing an anonymous function in as a callback.
 
 ```
@@ -159,29 +164,28 @@ function DashboardController() { }
 
 **directives**
 
-  - file name: camel case suffixed with *.directive.js*
-    eg: *disallowSpace.directive.js*
-  - directive name: camel case
-    eg: ` angular.directive('matchWindowHeight', {})` 
-    and in HTML *<div match-window-height = "">*
-  - use `restrict: 'EA'` in directive 
-
+- file name: camel case suffixed with _.directive.js_
+  eg: _disallowSpace.directive.js_
+- directive name: camel case
+  eg: `angular.directive('matchWindowHeight', {})`
+  and in HTML _<div match-window-height = "">_
+- use `restrict: 'EA'` in directive
 
 **services**
 
-  - file name: lowercase suffixed with *.service.js* 
-      eg: *database.service.js*
-  - service name: camel cased prefixed with `Service`
-      eg: `angular.factory('dataService', dataService)`
-  - use a `.factory` instead of `.service` for consistency.
-  - service dependency: `$http` 
-  - all method return Promise object 
-  - Using function declarations and accessible members up top or if there is one line of return than write inline.
-  - use angular standard method `$http.get()`, `$http.post()`, `$http.put()`
-  - always write `angular.toJson(formdata, true)` when using $http.post 
-  - use `params` or template literal syntax when argument in the URL ( $http.get )
-  - Do Manual Annotating for Dependency Injection or use ng-annonate
-    `dataService.$inject = ['$http', '$q', logger'];`
+- file name: lowercase suffixed with _.service.js_
+  eg: _database.service.js_
+- service name: camel cased prefixed with `Service`
+  eg: `angular.factory('dataService', dataService)`
+- use a `.factory` instead of `.service` for consistency.
+- service dependency: `$http`
+- all method return Promise object
+- Using function declarations and accessible members up top or if there is one line of return than write inline.
+- use angular standard method `$http.get()`, `$http.post()`, `$http.put()`
+- always write `angular.toJson(formdata, true)` when using $http.post
+- use `params` or template literal syntax when argument in the URL ( $http.get )
+- Do Manual Annotating for Dependency Injection or use ng-annonate
+  `dataService.$inject = ['$http', '$q', logger'];`
 
 ```
       angular
@@ -197,7 +201,7 @@ function DashboardController() { }
                       saveList: saveList,
                       fetchItem: fetchItem
                   };
-            
+
             //////////// or define later /////////////
             const updateList => (formdata) {
                  return $http.put('endpoint',angular.toJson(formdata, true)
@@ -211,51 +215,50 @@ function DashboardController() { }
 
 - contains the `.html` files.
 - folders of each module
-- folder name - singular ( except *templates* )
+- folder name - singular ( except _templates_ )
 - file names will be single word and meaningful.
-- in *templates* folder, file name are separated by `_` and will have minimal self explanatory name such as *enroll_user.html*  *confirm_remove.html* and so on.
-- *common* folder have basic html files such as header, footer and navigation.
+- in _templates_ folder, file name are separated by `_` and will have minimal self explanatory name such as _enroll_user.html_ _confirm_remove.html_ and so on.
+- _common_ folder have basic html files such as header, footer and navigation.
 
 **less**
 
-We are using  less files for the styling of application.
+We are using less files for the styling of application.
 
-*custom.less* in this file we add new stylesheet.
-*base.less* contains all basic and default css 
-*variable.less* contains all variables such as colors and images location
+_custom.less_ in this file we add new stylesheet.
+_base.less_ contains all basic and default css
+_variable.less_ contains all variables such as colors and images location
 
 - Use BEM (Block Element Modifier) model while decakring custom css
 
-*header--title_size*
+_header--title_size_
 
+**_index.less_**
 
-*__index.less__* 
+is the main stylesheet file which import other less files located on _/app/less_ folder.
 
-is the main stylesheet file which import other less files located on */app/less* folder.
-
-*__index.module.js__*
+**_index.module.js_**
 
 The very first file of our project where we defined our module and register outher modules.
 
 `angular.module('app', ['ngStorage','ui-router', ...]);`
 
-*__index.config.js__*
+**_index.config.js_**
 
 is the file we are using for the purpose of all routing and other provider basic configuration.
 
 we also define `BASE_URL` here through `.value` provider
 
-*__index.run.js__*
+**_index.run.js_**
 
 - All broadcast messages and `.run` block method will be added here.
 - `$rootScope` is used.
 - user authentication and page accessibility will be done from here.
 - event using `$scope.on` and _State Events_ are defined here.
 
-*__app.filter.js__*
+**_app.filter.js_**
 
 - contains all filter definition in a single file.
-- filter method name will be uppercase prefix with  `_FILTER`.
+- filter method name will be uppercase prefix with `_FILTER`.
 
 ```
     .filter(<WHAT>_FILTER, function (DI) {
@@ -267,11 +270,11 @@ we also define `BASE_URL` here through `.value` provider
 
 ```
 
-*__app.constant.js__* 
+**_app.constant.js_**
 
 - contains all constant in a single file used across the application.
 - `.constant` name will be in uppercase and value can be {object} , [array] or [{object}, {object}].
-for eg.
+  for eg.
 
 ```
     .constant('USER_ROLES', {
@@ -289,31 +292,31 @@ for eg.
         }];
 ```
 
-*__app.interceptor.js__* 
+**_app.interceptor.js_**
 
 - creating an interceptor that will modify all requests made with the $http service as well as intercept any response errors.
-- We want to modify the outgoing requests so that we can add an authorization token to the header of our call. 
+- We want to modify the outgoing requests so that we can add an authorization token to the header of our call.
 
--The `$httpProvider` provider contains an array of interceptors which added  in `.config()`.
+-The `$httpProvider` provider contains an array of interceptors which added in `.config()`.
 
-*__app.messages.js__* 
+**_app.messages.js_**
 
 - The file required for the confirm button pop-up messages list.
 - Add all messages custom text using `.value` provider.
 
-*__app.route.js__*
+**_app.route.js_**
 
- - Separate route configuration into its own file. Examples might be *app.route.js* for the main module and *admin.route.js* for the admin module. 
+- Separate route configuration into its own file. Examples might be _app.route.js_ for the main module and _admin.route.js_ for the admin module.
 
-*__base.js__* 
+**_base.js_**
 
 - javascript code which is used to adjust the height of application on scroll and resize.
 
-*__sw.js__*
+**_sw.js_**
 
- - Service worker configuration will be written here ( activation, installation and strategy)
+- Service worker configuration will be written here ( activation, installation and strategy)
 
-*__chart.config.js__* 
+**_chart.config.js_**
 
 - The file contains basic configuration for the chart and graphs with mock data.
 
@@ -323,17 +326,17 @@ Use consistent names for all components following a pattern that describes the c
 
 There are 2 names for most assets:
 
-the file name (*noun.controller.js*)
-the registered component name with Angular (*NounController*)
+the file name (_noun.controller.js_)
+the registered component name with Angular (_NounController_)
 
- - PascalCaseConroller
- - camleCaseService
- - directiveDoesThis
+- PascalCaseConroller
+- camleCaseService
+- directiveDoesThis
 
-websockets 
- - websocket topic id in uppercase = TOPIC_FORWHAT eg; TOPIC_DBCOUNT
- - topic name prefixed with `topic` => topic_<forwhat> eg. topic_usage, `topic_dbcount`
- - channel name prefixed with `channel` => channel_<forwhat> eg. `channel_dbcount`
+websockets
 
-for more Reference: https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md
+- websocket topic id in uppercase = TOPIC_FORWHAT eg; TOPIC_DBCOUNT
+- topic name prefixed with `topic` => topic\_<forwhat> eg. topic_usage, `topic_dbcount`
+- channel name prefixed with `channel` => channel\_<forwhat> eg. `channel_dbcount`
 
+for more Reference: <https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md>
