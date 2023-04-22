@@ -1,15 +1,15 @@
 # DOTFILES
 
-This repo contains collection of my own settings, tips and tricks in below categories
+This repo contains collection of my own settings, tips and tricks in following categories
 
 ## Editor Settings
 
-    	- VS Code Workspace Settings
-    	- VS Code User Settings
-    	- Sublime Text Settings
-    	- UserFul Extensions
-    	- Keyboard shortcut
-    	- Custom Snippets
+  - VS Code Workspace Settings
+  - VS Code User Settings
+  - Sublime Text Settings
+  - UserFul Extensions
+  - Keyboard shortcut
+  - Custom Snippets
 
 ## Formatting and linting settings `.rc` files
 
