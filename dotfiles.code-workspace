@@ -176,6 +176,9 @@
       "javascript": "javascriptreact"
     },
     "js/ts.implicitProjectConfig.checkJs": true,
-    "editor.detectIndentation": false
+    "editor.detectIndentation": false,
+    "markdownlint.config": {
+      "MD007": false
+    }
   }
 }
