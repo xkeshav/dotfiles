@@ -1,15 +1,39 @@
 # DOTFILES
 
-This repo contains style guide and best practice for front end developer
+This repo contains collection of my own settings, tips and tricks in below categories
 
-- also include configuration files such as
-  - .bashrc
-  - sublime-settings
-  - vs code settings
-  - .eslintrc
-  - .jshintrc
-  - .lesshintc
-  - .editorconfig
-  - .bowerrc
-  - .babelrc
-    and many more
+## Editor Settings
+
+    	- VS Code Workspace Settings
+    	- VS Code User Settings
+    	- Sublime Text Settings
+    	- UserFul Extensions
+    	- Keyboard shortcut
+    	- Custom Snippets
+
+## Formatting and linting settings `.rc` files
+
+    - eslintrc file
+    - editorconfig
+    - css lint file
+    - markdown lint file
+
+## OS specific Settings
+
+    - Alias in Windows
+    - Alias in Mac
+    - Powershell / Shell Script
+
+## Language specific
+
+    - Angular JS Best Practices ( although it has been deprecated)
+    - React JS Best Practices
+    - TypeScript tips.
+
+Note: Check other branch for related stuff
+
+---
+
+Thanks,
+
+Keshav Mohta.

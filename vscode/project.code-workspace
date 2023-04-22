@@ -1,21 +1,21 @@
 // workspace settings
 
 {
-    "folders": [
-        {
-            "path": "./"
-        }
-    ],
-    "settings": {
-        "typescript.referencesCodeLens.enabled": true,
-        "typescript.implementationsCodeLens.enabled": true,
-        "typescript.autoImportSuggestions.enabled": true,
-        "search.exclude": {
-            "node_modules/": false,
-            "e2e/": true,
-            "dist": true,
-            "/src/assets/icon": true,
-            "/src/assets/fonts": true,
-        }
+  "folders": [
+    {
+      "path": "./"
     }
+  ],
+  "settings": {
+    "typescript.referencesCodeLens.enabled": true,
+    "typescript.implementationsCodeLens.enabled": true,
+    "typescript.autoImportSuggestions.enabled": true,
+    "search.exclude": {
+      "node_modules/": false,
+      "e2e/": true,
+      "dist": true,
+      "/src/assets/icon": true,
+      "/src/assets/fonts": true
+    }
+  }
 }

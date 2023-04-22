@@ -1,13 +1,16 @@
 {
-    "fileExtensions": [".less", ".css"],
-
-    "excludedFiles": ["vendor.less"],
-
-    "spaceAfterPropertyColon": {
-        "enabled": true,
-        "style": "one_space" // Comments are allowed
-    },
-    "singleLinePerSelector": false,
-    "propertyOrdering": false,
-    "importantRule": false // To disable a rule completely, set it to false
+	"fileExtensions": [
+		".less",
+		".css"
+	],
+	"excludedFiles": [
+		"vendor.less"
+	],
+	"spaceAfterPropertyColon": {
+		"enabled": true,
+		"style": "one_space"
+	},
+	"singleLinePerSelector": false,
+	"propertyOrdering": false,
+	"importantRule": false
 }
