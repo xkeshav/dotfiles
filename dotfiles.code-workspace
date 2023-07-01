@@ -6,10 +6,6 @@
   ],
   "settings": {
     "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "gitlens.advanced.messages": {
-      "suppressGitMissingWarning": true
-    },
     "files.exclude": {
       "**/node_modules/": true
     },
@@ -114,7 +110,6 @@
     "prettier.printWidth": 140,
     "workbench.list.multiSelectModifier": "alt",
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "window.title": "${activeFolderMedium}${separator}${activeEditorShort}${separator}${rootName}${separator}${dirty}",
     "editor.linkedEditing": true,
     "editor.multiCursorModifier": "ctrlCmd",
     "scss.lint.emptyRules": "ignore",
