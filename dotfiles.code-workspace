@@ -152,8 +152,8 @@
       "*.log": "default"
     },
     "editor.minimap.enabled": false,
-    "window.zoomLevel": 1,
-    "workbench.colorTheme": "Cobalt2",
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "GitHub Dark",
     "editor.fontSize": 14,
     "[javascriptreact]": {},
     "editor.accessibilitySupport": "off",

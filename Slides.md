@@ -287,4 +287,4 @@ add snippets in **launch.json**
 
 # Thank you
 
-![w:500](./dotfiles.png)
+![w:500](./images/dotfiles.png)
