@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "node file",
+      "detail": "Create file from node",
+      "type": "shell",
+      "command": "echo Running",
+      "dependsOrder": "sequence",
+      "dependsOn": ["create folder"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [],
+      "args": ["${input:name}"]
+    },
+    {
+      "label": "create folder",
+      "type": "shell",
+      "command": "node ./.vscode/boilerplate.js ${input:name}"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "name",
+      "description": "Name your folder",
+      "default": "alpha",
+      "type": "promptString"
+    }
+  ]
+}
