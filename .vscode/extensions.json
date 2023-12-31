@@ -8,6 +8,9 @@
 		"mkxml.vscode-filesize",
 		"christian-kohler.path-intellisense",
 		"artdiniz.quitcontrol-vscode",
-		"enkia.tokyo-night"
+    "enkia.tokyo-night",
+    "astro-build.astro-vscode",
+    "dbaeumer.vscode-eslint",
+    "johnpapa.vscode-peacock"
 	]
 }
