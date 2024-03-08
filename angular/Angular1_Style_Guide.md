@@ -4,7 +4,7 @@ Following is the style guide for the FE project Based on Angular 1. It is recomm
 
 1. root folder for FE would be **WebUI** with following file structure
 
-```txt
+```sh
     └── .gitignore
     ├── node_modules
     ├── webpack.config.json
@@ -25,7 +25,7 @@ Following is the style guide for the FE project Based on Angular 1. It is recomm
 - this is the top-level directory
 - following is the folder structure
 
-```
+```sh
 ├── app
 ├── assets
 ├── favicon.ico
@@ -36,7 +36,7 @@ Following is the style guide for the FE project Based on Angular 1. It is recomm
 
 **assets**
 
-- All static assests will be placed here
+- All static assets will be placed here
 
 ```
   ├── images
@@ -57,7 +57,7 @@ All images of project will be placed under **images** folder
 
 **libs**
 
-- save extrenal library/ plugins JS files which package are not resolvable by
+- save external library/ plugins JS files which package are not resolvable by
   `bower install` or `npm install`
   - FileSaver.js
   - Moment.js
@@ -69,9 +69,9 @@ All images of project will be placed under **images** folder
 - enable ng-strict-di `<div ng-app="myApp" ng-strict-di>`
 - Service worker registration code will be here in `<script>` tag
 
-**app** directory has below folder structure ( Note: this is **folder-by-type** structure )
+**app** directory has below folder structure ( Note: this is **folder-by-type** structure)
 
-```
+```sh
 .
 ├── app.constant.js
 ├── app.filter.js
@@ -115,51 +115,45 @@ All images of project will be placed under **images** folder
     - controller name: `.controller('ConfirmModalController', {});`
     - All child controller template at one place under _views/templates_ folder
 
-  - Define all variables on top of controller and bind with `vm` with `angualr.extend()` method.
+  - Define all variables on top of controller and bind with `vm` with `angular.extend()`
 
-```
+```js
 /* avoid */
 function CustomerController() {
-    this.name = {};
-    this.sendMessage = function() { };
+  this.name = {};
+  this.sendMessage = function () {};
 }
 
 function CustomerController($scope) {
-    $scope.name = {};
-    $scope.sendMessage = function() { };
+  $scope.name = {};
+  $scope.sendMessage = function () {};
 }
 
 /* recommended */
 function CustomerController() {
-    const vm = this;
-    angular.extend(vm , {
+  const vm = this;
+  angular.extend(vm, {
     name: {},
-    sendMessage: sendMessage
-    })
+    sendMessage: sendMessage,
+  });
 
-    const sendMessage = function() { };
+  const sendMessage = function () {};
 }
-
 ```
 
 - Use named functions instead of passing an anonymous function in as a callback.
 
-```
+```js
 /* avoid */
 
-angular
-    .module('app')
-    .controller('DashboardController', function() { })
-
+angular.module("app").controller("DashboardController", function () {});
 
 /* recommended */
 
 // dashboard.js
-angular
-    .module('app')
-    .controller('DashboardController', DashboardController);
+angular.module("app").controller("DashboardController", DashboardController);
 
-function DashboardController() { }
+function DashboardController() {}
 ```
 
 **directives**
@@ -187,7 +181,7 @@ function DashboardController() { }
 - Do Manual Annotating for Dependency Injection or use ng-annonate
   `dataService.$inject = ['$http', '$q', logger'];`
 
-```
+```js
       angular
           .module('app.core')
           .factory('dataService', dataService);
@@ -203,8 +197,8 @@ function DashboardController() { }
                   };
 
             //////////// or define later /////////////
-            const updateList => (formdata) {
-                 return $http.put('endpoint',angular.toJson(formdata, true)
+            const updateList => (form_data) {
+                 return $http.put('endpoint',angular.toJson(form_data, true)
             };
 
             const fetchItem => (id) => $http.get('/api/v1.0/database/description', { params: { id: id }});
@@ -228,7 +222,7 @@ _custom.less_ in this file we add new stylesheet.
 _base.less_ contains all basic and default css
 _variable.less_ contains all variables such as colors and images location
 
-- Use BEM (Block Element Modifier) model while decakring custom css
+- Use BEM (Block Element Modifier) model while declaring custom css
 
 _header--title_size_
 
@@ -260,7 +254,7 @@ we also define `BASE_URL` here through `.value` provider
 - contains all filter definition in a single file.
 - filter method name will be uppercase prefix with `_FILTER`.
 
-```
+```js
     .filter(<WHAT>_FILTER, function (DI) {
         return (input, arg) => {
             var output = filterToApply(input,arg);
@@ -276,13 +270,13 @@ we also define `BASE_URL` here through `.value` provider
 - `.constant` name will be in uppercase and value can be {object} , [array] or [{object}, {object}].
   for eg.
 
-```
+```js
     .constant('USER_ROLES', {
             ROLE_SYSTEM_ADMIN: 'System Administrator'
     })
 ```
 
-```
+```js
 .constant('TOP_NAVBAR', [{
             "caption": "Dashboard",
             "link": "dashboard"
@@ -322,21 +316,22 @@ we also define `BASE_URL` here through `.value` provider
 
 ### Naming convention
 
-Use consistent names for all components following a pattern that describes the component's feature then (optionally) its type. My recommended pattern is feature.type.js.
+Use consistent names for all components following a pattern that describes the component's feature
+then (optionally) its type.My recommended pattern is _feature.type.js_
 
 There are 2 names for most assets:
 
 the file name (_noun.controller.js_)
 the registered component name with Angular (_NounController_)
 
-- PascalCaseConroller
-- camleCaseService
+- PascalCaseController
+- camelCaseService
 - directiveDoesThis
 
-websockets
+### webSockets
 
-- websocket topic id in uppercase = TOPIC_FORWHAT eg; TOPIC_DBCOUNT
-- topic name prefixed with `topic` => topic\_<forwhat> eg. topic_usage, `topic_dbcount`
-- channel name prefixed with `channel` => channel\_<forwhat> eg. `channel_dbcount`
+- websocket topic id in uppercase = TOPIC_FOR_WHAT eg; TOPIC_DB_COUNT
+- topic name prefixed with `topic` => topic\_<for_what> eg. topic_usage, `topic_db_count`
+- channel name prefixed with `channel` => channel\_<for_what> eg. `channel_db_count`
 
 for more Reference: <https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md>

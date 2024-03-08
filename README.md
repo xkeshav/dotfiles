@@ -20,6 +20,7 @@ This repo contains collection of my own settings, tips and tricks in following c
 - Alias in Windows
 - Alias in Mac
 - Powershell / Shell Script
+- github specific tips
 
 ## Language specific
 
@@ -31,7 +32,7 @@ Note: Check other branch for related stuff
 
 ---
 
-# React meet up talk slides
+## React meet up talk slides
 
 - Date: 01 July, 2023
 - Venue: Atlassian Office, Bengaluru.

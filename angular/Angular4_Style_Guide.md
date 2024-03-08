@@ -1,20 +1,19 @@
-
 # Angular 4 Style Guide
 
-### interfaces.ts
+## interfaces.ts
 
 ```js
 export interface ResponseData {
-    code: number;
-    message: string;
-    status: string;
+  code: number;
+  message: string;
+  status: string;
 }
 
 export interface Color {
-    id: string;
-    code: string;
-    name: string;
-    value: number;
+  id: string;
+  code: string;
+  name: string;
+  value: number;
 }
 ```
 
@@ -51,10 +50,10 @@ class ColorService {
                 return res.item;
         });
     }
-    // @param formdata = { id: '', code: '00ff00',  name: 'red', value: 25 }
-    updateColor(formdata) { 
+    // @param form_data = { id: '', code: '00ff00',  name: 'red', value: 25 }
+    updateColor(form_data) {
         return this.httpClient
-            .post<ColorResponse>(`${BASE_URL}/color/`, formdata, { headers: this.headers }).map((res) => {
+            .post<ColorResponse>(`${BASE_URL}/color/`, form_data, { headers: this.headers }).map((res) => {
                 return res.item;
             });
     }
@@ -84,11 +83,11 @@ import { Color } from './shared/interface/';
     templateUrl: './color.component.html'
 }
 class ColorComponent extends OnInit {
-    
-    public color: Color[]; 
-    
+
+    public color: Color[];
+
     constructor ( private colorService: ColorService) {}
-    
+
     this.colorService.getColors().subscribe( (data) => {
         // do some action on data and return
         this.color = data;
