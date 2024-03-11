@@ -13,7 +13,7 @@ _class: invert
 _SDE III at JP Morgan Chase & Co._
 
 > Make your VS Code Smarter
-> author: *@xkeshav*
+> author: _@xkeshav_
 
 ---
 
@@ -95,9 +95,9 @@ _SDE III at JP Morgan Chase & Co._
 
 # Extensions [ _⌘ + Shift + X_ ]
 
-<!-- intall using VSIX or marketplace -->
+<!-- install using VSIX or marketplace -->
 
-- Add recommened extensions located in _.vscode/extensions.json_ file
+- Add recommended extensions located in _.vscode/extensions.json_ file
 
 ```json
 {

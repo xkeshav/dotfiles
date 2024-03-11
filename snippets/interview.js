@@ -13,4 +13,4 @@ var isEvenOdd = (num) => {
 
 isEvenOdd(21.5);
 isEvenOdd(21.0);
-//f1n();
+f1n();
