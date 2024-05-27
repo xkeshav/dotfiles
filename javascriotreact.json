@@ -1,0 +1,35 @@
+{
+	"console-obj": {
+		"scope": "javascript, javascriptreact, typescript, typescriptreact",
+		"prefix": "cl",
+		"body": [
+			"console.log({ $0 });"
+		],
+		"description": "destructured console log"
+	},
+  "React: useState": {
+        "scope": "typescriptreact, javascriptreact",
+        "prefix": "us",
+        "body": [
+            "const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState(${2:null});",
+            "$3"
+        ],
+        "description": "React Hook: useState"
+    },
+    "React: Functional Component": {
+        "scope": "typescriptreact, typescript",
+        "prefix": "rfc",
+        "body": [
+            "import { Fragment } from 'react';",
+            "",
+            "type ${2:${1}Props} = { }",
+            "export const ${1:${TM_FILENAME_BASE}}: React.FC<${2}> = (props) => {",
+            "\tconsole.log({ props }); $BLOCK_COMMENT_START added to suppress lint error $BLOCK_COMMENT_END",
+            "\treturn (",
+            "\t\t<Fragment>$0</Fragment>",
+            "\t);",
+            "}"
+        ],
+        "description": "React Functional Component"
+    }
+}
