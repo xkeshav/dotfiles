@@ -11,7 +11,7 @@ esac
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
-
+export PROMPT_DIRTRIM=2
 # append to the history file, don't overwrite it
 shopt -s histappend
 
@@ -89,7 +89,7 @@ PS1="${debian_chroot:+($debian_chroot)} ${LIGHT_GREEN}\t ${YELLOW}\u${WHITE}@${C
 else
 PS1="${debian_chroot:+($debian_chroot)} \t \u@\h:\w \$(parse_git_branch)\$ "
 fi
-PS1="$PS1${LIGHT_RED}"
+PS1="$PS1${COLOR_NONE}"
 
 unset color_prompt force_color_prompt
 
@@ -131,16 +131,13 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 NPM_PACKAGES="${HOME}/.npm-packages"
 export PATH="$PATH:$NPM_PACKAGES/bin"
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
+
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -148,6 +145,16 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# ensure git completion is loaded so __git_complete exists
+if [ -f /usr/share/bash-completion/completions/git ]; then
+  . /usr/share/bash-completion/completions/git
+fi
+
+if [ -f ~/.bash_aliases ]; then
+   . ~/.bash_aliases
+fi
+
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -158,20 +165,6 @@ export NVM_DIR="$HOME/.nvm"
 source <(ng completion script)
 export PATH=$HOME/.local/bin:$PATH
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/recursive/dev/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/recursive/dev/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/recursive/dev/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/recursive/dev/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
 . "/home/recursive/.deno/env" source /etc/profile.d/bash_completion.sh
 
@@ -182,7 +175,34 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - bash)"
-eval "$(pyenv virtualenv-init -)"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="/opt/Citrix/ICAClient:$PATH"
+alias wfica="LC_ALL=C /opt/Citrix/ICAClient/wfica"
+alias citrix="LC_ALL=C /opt/Citrix/ICAClient/wfica"
+alias citrix-shell="LC_ALL=C /opt/Citrix/ICAClient/wfica.sh"
+
+# Seagate drive aliases
+alias mount-seagate="sudo /usr/local/bin/seagate-automount.sh"
+alias unmount-seagate="sudo /usr/local/bin/seagate-unmount.sh"
+alias seagate-log="tail -f /var/log/seagate-automount.log"
+
+# Python virtual environment settings
+export WORKON_HOME="/xtra/venvs"
+export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python3"
+export PIP_REQUIRE_VIRTUALENV=true
+
+# Helper function to create venv in /xtra/venvs
+mkvenv() {
+    if [ -z "$1" ]; then
+        echo "Usage: mkvenv <venv_name>"
+        return 1
+    fi
+    python3 -m venv "/xtra/venvs/$1"
+    echo "Virtual environment '$1' created in /xtra/venvs/$1"
+    echo "Activate with: source /xtra/venvs/$1/bin/activate"
+}
+
+# Prevent creating __pycache__ in current directory
+export PYTHONDONTWRITEBYTECODE=1
+
+. "$HOME/.cargo/env"

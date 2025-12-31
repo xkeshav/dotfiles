@@ -1,4 +1,3 @@
-cat ~/.bash_aliases 
 alias cls=clear
 alias cp='cp -iv'                           # Preferred 'cp' implementation
 alias mv='mv -iv'                           # Preferred 'mv' implementation
@@ -13,18 +12,50 @@ alias ~="cd ~"                              # ~:            Go Home
 alias qfind="find . -name "                 # qfind:    Quickly search for file
 alias subl='open -a "Sublime Text"'
 alias psgrep='ps aux | grep '
-# folder aliases
-alias dev='cd ~/dev'
+# git alias
+alias gp='git pull'
+alias gst='git status'
 
-alias tzc='cd ~/dev/recursivezero/tz-client'
-alias tzs='cd ~/dev/recursivezero/tz-server'
-alias tzsc='cd ~/dev/recursivezero/tz-script'
-alias abcd='cd ~/dev/recursivezero/abcd'
-alias rz='cd ~/dev/recursivezero'
+# folder aliases
+
+export work='/xtra/work'  # use as cd $work
+export rz='/xtra/work/recursivezero'
+export xk='/xtra/work/xkeshav'
+
+alias work='cd /xtra/work'
+alias tzf='cd $rz/tz-fabric'
+alias tzc='cd $rz/tz-client'
+alias tzs='cd $rz/tz-server'
+alias tzp='cd $rz/tz-script'
+alias abcd='cd $rz/abcd'
+alias rz='cd /xtra/work/recursivezero'
+alias xk='cd /xtra/work/xkeshav'
+alias mmt='cd $work/maturity-matrix'
 
 alias nrd='npm run dev'
 alias nrs='npm run start'
 alias nrb='npm run build'
+alias nrp='npm run preview'
+alias lint='npm run lint'
 alias nr='npm run $@'
+alias ni='npm install $@'
+alias nu='npm uninstall $@'
+# poetry specific
+alias prd='poetry run dev'
+alias prz='poetry run threadzip dev'
+
 
 alias python='python3'
+alias check="shopt -q login_shell && echo 'Login shell' || echo 'Not a login shell'"
+
+# switch branch name
+gsh() {
+    if [ -z "$1" ]; then
+        git branch
+    elif [ "$1" = "-c" ]; then
+	git switch -c "$2"
+    else
+        git switch "$1"
+    fi
+}
+__git_complete gsh _git_switch
