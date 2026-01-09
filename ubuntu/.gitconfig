@@ -1,23 +1,28 @@
 [user]
-	name = Keshav Mohta
-	email = xkeshav@gmail.com
-	signingkey = E227BC305D840B71
+	name = admin
+	email = recursivezero@outlook.com
+	signingKey = ABCDEFGHIJKL
+
 [commit]
 	gpgsign = true
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
 [credential]
 	helper = 
 	helper = /usr/local/bin/git-credential-manager
+	credentialStore = secretservice
+
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+
 [init]
 	defaultBranch = main
-[url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
+
 [alias]
 	http = config --get remote.origin.url
 	hide = update-index --assume-unchanged
@@ -25,6 +30,19 @@
 	hidden = !git ls-files -v | grep "^h"
 	company = !git config user.name recursivezero && git config user.email recursivezero@outlook.com
 	khud = !git config user.name xkeshav && git config user.email xkeshav@gmail.com
+
 [core]
 	editor = vim
 	ignorecase = false
+	safecrlf = warn
+  
+[pull]
+	rebase = true
+
+# --- ROUTING LOGIC ---
+
+[includeIf "gitdir:~/projects/xkeshav/"]
+	path = ~/.gitconfig-personal
+
+[includeIf "gitdir:~/projects/recursivezero/"]
+	path = ~/.gitconfig-work

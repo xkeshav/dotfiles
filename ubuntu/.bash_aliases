@@ -58,4 +58,5 @@ gsh() {
         git switch "$1"
     fi
 }
+
 __git_complete gsh _git_switch

@@ -1,0 +1,58 @@
+# colors for bash prompt
+
+RED='\[\033[01;31m\]'
+GREEN='\[\033[01;32m\]'
+YELLOW='\[\033[01;33m\]'
+BLUE='\[\033[01;34m\]'
+MAGENTA='\[\033[01;35m\]'
+CYAN='\[\033[01;36m\]'
+GRAY='\[\033[01;37m\]'
+
+LIGHT_RED='\[\033[00;31m\]'
+LIGHT_GREEN='\[\033[00;32m\]'
+LIGHT_YELLOW='\[\033[00;33m\]'
+LIGHT_BLUE='\[\033[00;34m\]'
+LIGHT_CYAN='\[\033[00;36m\]'
+LIGHT_GRAY='\[\033[01;37m\]'
+
+WHITE='\[\033[00m\]'
+COLOR_NONE='\[\e[00m\]'
+
+# Significance: Enables colors for various CLI tools globally
+export CLICOLOR=1
+# Significance: Defines colors for BSD/macOS 'ls' (Good for cross-platform)
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
+parse_git_branch () {
+   while read -r branch; do
+        [[ $branch = \** ]] && current_branch=${branch#* }
+   done < <(git branch 2>/dev/null)
+   [[ $current_branch ]] && printf '(%s) ' "$current_branch"
+}
+
+# Set trim limit
+export PROMPT_DIRTRIM=2
+
+# --- Python & Poetry Settings ---
+
+# Safety: Prevent pip from installing to global system
+export PIP_REQUIRE_VIRTUALENV=true
+
+# Cleanup: Prevent __pycache__ clutter in project folders
+export PYTHONDONTWRITEBYTECODE=1
+
+
+# Helper for non-Poetry scripts
+mkvenv() {
+    if [ -z "$1" ]; then
+        echo "Usage: mkvenv <venv_name>"
+        return 1
+    fi
+    python3 -m venv "/xtra/venvs/$1"
+    echo "Virtual environment '$1' created."
+}
+
+PS1="${debian_chroot:+($debian_chroot)} ${LIGHT_GREEN}\t ${YELLOW}\u${WHITE}@${CYAN}\h${GREEN}:${BLUE}\w${MAGENTA} \$(parse_git_branch)${WHITE}\$ "
+
+
+unset color_prompt force_color_prompt
